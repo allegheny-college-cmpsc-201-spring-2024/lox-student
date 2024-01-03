@@ -10,7 +10,10 @@ import java.util.List;
 
 public class Main {
 
+  public static final Interpreter interpreter = new Interpreter();
+
   static boolean hadError = false;
+  static boolean hadRuntimeError = false;
 
   static void error(int line, String message) {
     report(line, "", message);
@@ -22,6 +25,12 @@ public class Main {
     } else {
       report(token.line, " at '" + token.lexeme + "'", message);
     }
+  }
+
+  static void runtimeError(RuntimeError error) {
+    System.err.println(error.getMessage() +
+      "\n[line " + error.token.line + "]");
+    hadRuntimeError = true;
   }
 
   private static void report(int line, String where, String message) {
@@ -36,6 +45,9 @@ public class Main {
     run(new String(bytes, Charset.defaultCharset()));
     if (hadError) {
       System.exit(65);
+    }
+    if (hadRuntimeError) {
+      System.exit(70);
     }
   }
 
@@ -57,7 +69,7 @@ public class Main {
     Parser parser = new Parser(tokens);
     Expr expression = parser.parse();
     if (hadError) return;
-    System.out.println(new ASTPrinter().print(expression));
+    interpreter.interpret(expression);
   }
 
   public static void main(String[] args) throws IOException {
