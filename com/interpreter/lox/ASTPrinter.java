@@ -1,6 +1,9 @@
 package com.interpreter.lox;
 
-class ASTPrinter implements Expr.Visitor<String> {
+import java.util.List;
+
+class ASTPrinter implements Expr.Visitor<String>,
+                            Stmt.Visitor<String> {
 
   String print(Expr expr) {
     return expr.accept(this);
@@ -10,6 +13,11 @@ class ASTPrinter implements Expr.Visitor<String> {
   public String visitBinaryExpr(Expr.Binary expr) {
     return parenthesize(expr.operator.lexeme,
                         expr.left, expr.right);
+  }
+
+  @Override
+  public String visitAssignExpr(Expr.Assign expr) {
+    return astParenthesize("=", expr.name.lexeme, expr.value);
   }
 
   @Override
@@ -28,6 +36,43 @@ class ASTPrinter implements Expr.Visitor<String> {
     return parenthesize(expr.operator.lexeme, expr.right);
   }
 
+  @Override
+  public String visitVariableExpr(Expr.Variable expr) {
+    return expr.name.lexeme;
+  }
+
+  @Override
+  public String visitVarStmt(Stmt.Var stmt) {
+    if (stmt.initializer == null) {
+      return astParenthesize("var", stmt.name);
+    }
+
+    return astParenthesize("var", stmt.name, "=", stmt.initializer);
+  }
+
+  @Override
+  public String visitPrintStmt(Stmt.Print stmt) {
+    return parenthesize("print", stmt.expression);
+  }
+
+  @Override
+  public String visitExpressionStmt(Stmt.Expression stmt) {
+    return parenthesize(";", stmt.expression);
+  }
+
+  @Override
+  public String visitBlockStmt(Stmt.Block stmt) {
+    StringBuilder builder = new StringBuilder();
+    builder.append("(block ");
+
+    for (Stmt statement : stmt.statements) {
+      builder.append(statement.accept(this));
+    }
+
+    builder.append(")");
+    return builder.toString();
+  }
+
   private String parenthesize(String name, Expr... exprs) {
     StringBuilder builder = new StringBuilder();
 
@@ -39,6 +84,30 @@ class ASTPrinter implements Expr.Visitor<String> {
     builder.append(")");
 
     return builder.toString();
+  }
+
+  private String astParenthesize(String name, Object... parts) {
+    StringBuilder builder = new StringBuilder();
+    builder.append("(").append(name);
+    transform(builder, parts);
+    return builder.toString();
+  }
+
+  private void transform(StringBuilder builder, Object... parts) {
+    for (Object part : parts) {
+      builder.append(" ");
+      if (part instanceof Expr) {
+        builder.append(((Expr)part).accept(this));
+      } else if (part instanceof Stmt) {
+        builder.append(((Stmt)part).accept(this));
+      } else if (part instanceof Token) {
+        builder.append(((Token) part).lexeme);
+      } else if (part instanceof List) {
+        transform(builder, ((List) part).toArray());
+      } else {
+        builder.append(part);
+      }
+    }
   }
 
   public static void main(String[] args) {
