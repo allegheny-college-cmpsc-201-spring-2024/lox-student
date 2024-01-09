@@ -1,0 +1,16 @@
+- src/main/java/com/interpreter/lox/Main.java:
+  - description: src/main/java/com/interpreter/lox/Main.java exists
+    category: Files
+    check: ConfirmFileExists
+- src/main/java/com/interpreter/lox/Scanner.java:
+  - description: src/main/java/com/interpreter/lox/Scanner.java exists
+    category: Files
+    check: ConfirmFileExists
+- src/main/java/com/interpreter/lox/Token.java:
+  - description: src/main/java/com/interpreter/lox/Token.java exists
+    category: Files
+    check: ConfirmFileExists
+- src/main/java/com/interpreter/lox/TokenType.java:
+  - description: src/main/com/java/interpreter/lox/TokenType.java exists
+    category: Files
+    check: ConfirmFileExists
