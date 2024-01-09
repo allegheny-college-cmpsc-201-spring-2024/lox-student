@@ -11,21 +11,32 @@
  
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
  
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.11</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
- 
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.junit</groupId>
+				<artifactId>junit-bom</artifactId>
+				<version>5.10.1</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+  
   <build>
-    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+    <pluginManagement>
     <plugins>
         <plugin>
             <groupId>org.codehaus.mojo</groupId>
@@ -34,6 +45,23 @@
             <configuration>
                 <mainClass>com.interpreter.lox.Main</mainClass>
             </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.22.2</version>
+          <dependencies>
+               <dependency>
+                   <groupId>org.junit.platform</groupId>
+                   <artifactId>junit-platform-surefire-provider</artifactId>
+                   <version>1.2.0</version>
+               </dependency>
+          </dependencies>
+          <configuration>
+            <additionalClasspathElements>
+    					<additionalClasspathElement>src/test/com/interpreter/lox/*Tests.java</additionalClasspathElement>
+            </additionalClasspathElements>
+    			</configuration>
         </plugin>
     </plugins>
     </pluginManagement>
