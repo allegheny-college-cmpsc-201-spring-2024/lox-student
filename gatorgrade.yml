@@ -1,3 +1,11 @@
+- description: Passes all unit tests.
+  category: Testing
+  check: MatchCommandFragment
+  options:
+    command: mvn test
+    fragment: "Failures: 0"
+    count: 1
+    exact: false
 - src/main/java/com/interpreter/lox/Main.java:
   - description: src/main/java/com/interpreter/lox/Main.java exists
     category: Files
