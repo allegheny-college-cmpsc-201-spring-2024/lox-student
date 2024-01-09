@@ -59,6 +59,14 @@ class Resolver implements Expr.Visitor<Void>, Stmt.Visitor<Void> {
   }
 
   @Override
+  public Void visitClassStmt(Stmt.Class stmt) {
+    environment.define(stmt.name.lexeme, null);
+    LoxClass loxClass = new LoxClass(stmt.name, lexeme)
+    environment.assign(stmt.name, loxClass);
+    return null;
+  }
+
+  @Override
   public Void visitExpressionStmt(Stmt.Expression stmt) {
     resolve(stmt.expression);
     return null;
@@ -106,6 +114,12 @@ class Resolver implements Expr.Visitor<Void>, Stmt.Visitor<Void> {
     for (Expr argument : expr.arguments) {
       resolve(argument);
     }
+    return null;
+  }
+
+  @Override
+  public Void visitGetExpr(Expr.Get expr) {
+    resolve(expr.object);
     return null;
   }
 
