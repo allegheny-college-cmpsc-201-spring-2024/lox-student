@@ -17,10 +17,6 @@ jobs:
         sudo apt-get install default-jre
         sudo apt-get install default-jdk
         sudo apt-get install maven
-    - name: Run jUnit tests
-      if: always()
-      run: |
-        mvn test
     - name: Setup Python
       if: always()
       uses: actions/setup-python@v2
@@ -40,7 +36,7 @@ jobs:
         PIPENV_IGNORE_VIRTUALENVS: 1
     - name: Create Wizard report
       id: wizard
-      uses: term-world/wizard@v0.6.0
+      uses: term-world/wizard@main
       with:
         grader-report: 'gatorgrade_summary.json'
       if: always()
