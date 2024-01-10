@@ -40,9 +40,9 @@ jobs:
         PIPENV_IGNORE_VIRTUALENVS: 1
     - name: Create Wizard report
       id: wizard
-      uses: term-world/wizard@v0.5.4
+      uses: term-world/wizard@main
       with:
-        gatorgrade-config: 'gatorgrade.yml'
+        grader-report: 'gatorgrade_summary.json'
       if: always()
     env:
       GITHUB_TOKEN: ${{ secrets.ARBORIST }}
