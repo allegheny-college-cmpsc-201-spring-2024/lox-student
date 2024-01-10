@@ -2,9 +2,17 @@ setup: |
   echo "🧪 Running Maven tests (mvn test)"
   mvn test -q || true
 ---
+- description: Lox interpreter correctly interprets a novel expression
+  category: Tests
+  check: MatchCommandFragment
+  options:
+    command: mvn test -Dtest=BaseTests#testTokenOutput
+    fragment: "VAR var null\nIDENTIFIER standardToken null\nEQUAL = null\nNUMBER 3.14 3.14\nSEMICOLON ; null\nEOF  null"
+    count: 1
+    exact: true
 - target/surefire-reports/com.interpreter.lox.BaseTests.txt:
   - description: Lox error message format is correct
-    category: Testing
+    category: Tests
     check: MatchFileRegex
     options:
       regex: 'testErrorMessage(.*)<<<\sFAILURE!'
