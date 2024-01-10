@@ -29,7 +29,7 @@ jobs:
         sudo python -m pip install gatorgrade --ignore-installed PyYAML
     - name: Grade repository
       run: |
-        gatorgrade
+        gatorgrade --config .gatorgrade.yml --report file json gatorgrade_summary.json
       if: always()
       env:   
         PIPENV_VENV_IN_PROJECT: 1

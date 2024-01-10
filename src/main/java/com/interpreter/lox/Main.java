@@ -18,7 +18,6 @@ public class Main {
 
   private static String report(int line, String where, String message) {
     String fullMessage = "[line " + line + "] Error" + where + ": " + message;
-    System.err.println(fullMessage);
     hadError = true;
     return fullMessage;
   }
