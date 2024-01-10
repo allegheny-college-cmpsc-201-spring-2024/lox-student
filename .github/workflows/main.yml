@@ -17,6 +17,10 @@ jobs:
         sudo apt-get install default-jre
         sudo apt-get install default-jdk
         sudo apt-get install maven
+    - name: Run jUnit tests
+      if: always()
+      run: |
+        mvn test
     - name: Setup Python
       if: always()
       uses: actions/setup-python@v2
@@ -29,7 +33,7 @@ jobs:
         sudo python -m pip install gatorgrade --ignore-installed PyYAML
     - name: Grade repository
       run: |
-        gatorgrade --config .gatorgrade.yml --report file json gatorgrade_summary.json
+        gatorgrade --config gatorgrade.yml --report file json gatorgrade_summary.json
       if: always()
       env:   
         PIPENV_VENV_IN_PROJECT: 1
