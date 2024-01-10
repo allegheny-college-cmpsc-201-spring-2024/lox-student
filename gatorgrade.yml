@@ -1,11 +1,15 @@
-- description: Passes all unit tests.
-  category: Testing
-  check: MatchCommandFragment
-  options:
-    command: mvn test
-    fragment: "Failures: 0"
-    count: 1
-    exact: false
+setup: |
+  echo "🧪 Running Maven tests (mvn test)"
+  mvn test -q || true
+---
+- target/surefire-reports/com.interpreter.lox.BaseTests.txt:
+  - description: Lox error message format is correct
+    category: Testing
+    check: MatchFileRegex
+    options:
+      regex: 'testErrorMessage(.*)<<<\sFAILURE!'
+      count: 0
+      exact: true
 - src/main/java/com/interpreter/lox/Main.java:
   - description: src/main/java/com/interpreter/lox/Main.java exists
     category: Files

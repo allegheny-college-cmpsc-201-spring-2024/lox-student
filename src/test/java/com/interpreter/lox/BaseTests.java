@@ -12,7 +12,7 @@ class BaseTests {
   @Test
   void testErrorMessage() {
     assertEquals(
-      "[line 0] Error: Test Error",
+      "[line 0]XError: Test Error",
       Main.error(0, "Test Error")
     );
   }
