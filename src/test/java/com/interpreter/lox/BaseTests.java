@@ -3,6 +3,7 @@ package com.interpreter.lox;
 import java.io.*;
 import java.net.*;
 import java.nio.file.*;
+import java.util.Scanner;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
@@ -33,6 +34,7 @@ class BaseTests {
   @MethodSource
   @ParameterizedTest
   void testTokenOutput(String[] args) throws Exception {
+    System.out.println("🖨️\tOUTPUT (mvn exec:java)\r\n");
     lox.main(args);
   }
 

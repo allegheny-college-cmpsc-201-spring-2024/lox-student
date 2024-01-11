@@ -1,1 +1,5 @@
-var standardToken = 3.14;
+/* 
+   This serves as the
+   multiline comment
+*/
+var token = 3.14; // ignore me
