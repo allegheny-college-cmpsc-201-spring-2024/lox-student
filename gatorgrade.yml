@@ -17,7 +17,7 @@ setup: |
   check: MatchCommandRegex
   options:
     command: mvn test -Dtest=BaseTests#testTokenOutput -q
-    regex: 'ignore|me'
+    regex: 'ignore|me\s'
     count: 0
     exact: true
 - description: Lox interpreter correctly implements multiline comments
@@ -29,18 +29,34 @@ setup: |
     count: 0
     exact: true
 - src/main/java/com/interpreter/lox/Main.java:
-  - description: src/main/java/com/interpreter/lox/Main.java exists
+  - description: src/main/java/com/interpreter/lox/Main.java exists and contains no TODOs
     category: Files
-    check: ConfirmFileExists
+    check: MatchFileFragment
+    options:
+      fragment: "TODO"
+      count: 0
+      exact: true
 - src/main/java/com/interpreter/lox/Scanner.java:
-  - description: src/main/java/com/interpreter/lox/Scanner.java exists
+  - description: src/main/java/com/interpreter/lox/Scanner.java exists and contains no TODOs
     category: Files
-    check: ConfirmFileExists
+    check: MatchFileFragment
+    options:
+      fragment: "TODO"
+      count: 0
+      exact: true
 - src/main/java/com/interpreter/lox/Token.java:
-  - description: src/main/java/com/interpreter/lox/Token.java exists
+  - description: src/main/java/com/interpreter/lox/Token.java exists and contains no TODOs
     category: Files
-    check: ConfirmFileExists
+    check: MatchFileFragment
+    options:
+      fragment: "TODO"
+      count: 0
+      exact: true
 - src/main/java/com/interpreter/lox/TokenType.java:
-  - description: src/main/com/java/interpreter/lox/TokenType.java exists
+  - description: src/main/com/java/interpreter/lox/TokenType.java exists and contains no TODOs
     category: Files
-    check: ConfirmFileExists
+    check: MatchFileFragment
+    options:
+      fragment: "TODO"
+      count: 0
+      exact: true
