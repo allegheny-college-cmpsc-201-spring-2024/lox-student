@@ -19,8 +19,6 @@ Branches contain all code from preceding chapters.
 |:-------------|:-----------|
 |`mvn compile` |Builds the project |
 |`mvn test`    |Runs `jUnit` tests in `test/` |
-|`mvn package` |Create `JAR` file from code in `src/` |
-|`mvn exec:java` |Runs the project; requries preceding `mvn compile` |
+|`mvn exec:java` |Runs the project<sup>†</sup> |
 
-
-
+<sup>†</sup>Requires running `mvn compile` before using.
