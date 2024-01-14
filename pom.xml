@@ -1,32 +1,25 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
- 
   <groupId>com.interpreter.lox</groupId>
   <artifactId>lox</artifactId>
   <version>0.1.0</version>
- 
   <name>lox</name>
   <url>https://github.com/allegheny-college-cmpsc-201-spring-2024</url>
- 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
- 
   <dependencyManagement>
-  <dependencies>
-  <dependency>
-  <groupId>org.junit</groupId>
-  <artifactId>junit-bom</artifactId>
-  <version>5.10.1</version>
-  <type>pom</type>
-  <scope>import</scope>
-  </dependency>
-  </dependencies>
+    <dependencies>
+      <dependency>
+          <groupId>org.junit</groupId>
+          <artifactId>junit-bom</artifactId>
+          <version>5.10.0</version>
+          <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
   </dependencyManagement>
-
   <dependencies>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
@@ -39,15 +32,29 @@
       <version>5.10.0</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.codehaus.mojo</groupId>
+      <artifactId>exec-maven-plugin</artifactId>
+      <version>1.6.0</version>
+      <scope>compile</scope>
+    </dependency>
   </dependencies>
-  
   <build>
     <pluginManagement>
     <plugins>
         <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>exec-maven-plugin</artifactId>
-            <version>1.2.1</version>
+            <version>1.6.0</version>
+            <executions>
+              <execution>
+                <id>execute-lox</id>
+                <phase>compile</phase>
+                <goals>
+                  <goal>java</goal>
+                </goals>
+              </execution>
+            </executions>
             <configuration>
                 <mainClass>com.interpreter.lox.Main</mainClass>
             </configuration>
