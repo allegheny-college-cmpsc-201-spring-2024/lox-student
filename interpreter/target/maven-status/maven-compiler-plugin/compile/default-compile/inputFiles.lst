@@ -1,0 +1,17 @@
+/home/dluman/cmpsc201/lox/interpreter/src/main/java/com/interpreter/lox/Token.java
+/home/dluman/cmpsc201/lox/interpreter/src/main/java/com/interpreter/lox/RuntimeError.java
+/home/dluman/cmpsc201/lox/interpreter/src/main/java/com/interpreter/lox/Environment.java
+/home/dluman/cmpsc201/lox/interpreter/src/main/java/com/interpreter/lox/Return.java
+/home/dluman/cmpsc201/lox/interpreter/src/main/java/com/interpreter/lox/Interpreter.java
+/home/dluman/cmpsc201/lox/interpreter/src/main/java/com/interpreter/lox/Main.java
+/home/dluman/cmpsc201/lox/interpreter/src/main/java/com/interpreter/lox/Resolver.java
+/home/dluman/cmpsc201/lox/interpreter/src/main/java/com/interpreter/lox/Expr.java
+/home/dluman/cmpsc201/lox/interpreter/src/main/java/com/interpreter/lox/LoxInstance.java
+/home/dluman/cmpsc201/lox/interpreter/src/main/java/com/interpreter/lox/ASTPrinter.java
+/home/dluman/cmpsc201/lox/interpreter/src/main/java/com/interpreter/lox/Stmt.java
+/home/dluman/cmpsc201/lox/interpreter/src/main/java/com/interpreter/lox/LoxCallable.java
+/home/dluman/cmpsc201/lox/interpreter/src/main/java/com/interpreter/lox/TokenType.java
+/home/dluman/cmpsc201/lox/interpreter/src/main/java/com/interpreter/lox/LoxClass.java
+/home/dluman/cmpsc201/lox/interpreter/src/main/java/com/interpreter/lox/Scanner.java
+/home/dluman/cmpsc201/lox/interpreter/src/main/java/com/interpreter/lox/LoxFunction.java
+/home/dluman/cmpsc201/lox/interpreter/src/main/java/com/interpreter/lox/Parser.java
