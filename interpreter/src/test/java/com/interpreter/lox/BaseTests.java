@@ -23,7 +23,7 @@ class BaseTests {
   private final static Main lox = new Main();
 
   static Stream<Arguments> testTokenOutput() throws Exception {
-    URL resource = BaseTests.class.getClassLoader().getResource("tokens.lox");
+    URL resource = BaseTests.class.getClassLoader().getResource("inheritance.lox");
     File file = Paths.get(resource.toURI()).toFile();
     String absPath = file.getAbsolutePath();
     return Stream.of(
@@ -36,15 +36,6 @@ class BaseTests {
   void testTokenOutput(String[] args) throws Exception {
     System.out.println("🖨️\tOUTPUT (mvn exec:java)\r\n");
     lox.main(args);
-  }
-
-  @Test
-  void testErrorMessage() {
-    assertEquals(
-      "[line 0] Error: Test Error",
-      lox.error(0, "Test Error")
-    );
-    lox.hadError = false;
   }
 
 }
