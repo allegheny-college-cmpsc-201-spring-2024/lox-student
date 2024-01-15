@@ -22,3 +22,9 @@ Branches contain all code from preceding chapters.
 |`mvn exec:java` |Runs the project<sup>†</sup> |
 
 <sup>†</sup>Requires running `mvn compile` before using.
+
+## Notes on repository setup
+
+The repository's Maven configuration works from the command line, setup included contemplates
+the content of the [Getting Started guide](wiki/Getting-Started), which outlines how to set
+up the Java SDK and runtime in addition to helpful Maven tools for VSCode.
