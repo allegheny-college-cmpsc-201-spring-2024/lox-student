@@ -47,31 +47,9 @@
               <groupId>org.codehaus.mojo</groupId>
               <artifactId>exec-maven-plugin</artifactId>
               <version>1.2.1</version>
-              <executions>
-                <execution>
-                  <id>GenerateAST</id>
-                  <phase>compile</phase>
-                  <goals>
-                    <goal>java</goal>
-                  </goals>
-                  <configuration>
-                     <mainClass>com.interpreter.tools.GenerateAST</mainClass>
-                     <arguments>
-                      <argument>${session.executionRootDirectory}/interpreter/src/main/java/com/interpreter/lox</argument>
-                     </arguments>
-                  </configuration>
-                </execution>
-                <execution>
-                  <id>Interpreter</id>
-                  <phase>compile</phase>
-                  <goals>
-                    <goal>java</goal>
-                  </goals>
-                  <configuration>
-                      <mainClass>com.interpreter.lox.Main</mainClass>
-                  </configuration>
-                </execution>
-              </executions>
+              <configuration>
+                  <mainClass>com.interpreter.lox.Main</mainClass>
+              </configuration>
           </plugin>
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
@@ -95,7 +73,7 @@
     </pluginManagement>
   </build>
   <modules>
-    <module>interpreter</module>
     <module>tools</module>
+    <module>interpreter</module>
   </modules>
 </project>
