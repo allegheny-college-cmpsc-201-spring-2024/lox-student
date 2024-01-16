@@ -1,7 +1,5 @@
 package com.interpreter.lox;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.PrintStream;
@@ -15,9 +13,11 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class BaseTests {
 
-  /* 
+  /*
     Word to the accepted answer at SO, they're a real one.
     https://stackoverflow.com/questions/1119385/junit-test-for-system-out-println
   */
@@ -34,7 +34,7 @@ class BaseTests {
     System.setErr(new PrintStream(errContent));
   }
 
-  static Stream<Arguments> testTokenOutput() throws Exception {
+  static Stream<Arguments> testProgramOutput() throws Exception {
     URL resource = BaseTests.class.getClassLoader().getResource("inheritance.lox");
     File file = Paths.get(resource.toURI()).toFile();
     String absPath = file.getAbsolutePath();
@@ -45,7 +45,7 @@ class BaseTests {
 
   @MethodSource
   @ParameterizedTest
-  void testTokenOutput(String[] args) throws Exception {
+  void testProgramOutput(String[] args) throws Exception {
     Main.main(args);
     assertEquals(
       "A method",

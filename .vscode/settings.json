@@ -4,6 +4,10 @@
         {
             "command": "exec:java",
             "debug": false
+        },
+        {
+            "command": "compile",
+            "debug": false
         }
     ],
     "maven.view": "hierarchical"

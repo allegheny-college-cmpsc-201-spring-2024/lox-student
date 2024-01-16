@@ -4,11 +4,25 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
 >
   <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <artifactId>LoxLanguage</artifactId>
-    <groupId>com.interpreter.lox</groupId>
-    <version>0.1.0</version>
-  </parent>
+  <groupId>com.interpreter.tools</groupId>
   <name>AST Generator</name>
   <artifactId>loxTools</artifactId>
+  <version>0.1.0</version>
+  <build>
+    <pluginManagement>
+      <plugins>
+          <plugin>
+              <groupId>org.codehaus.mojo</groupId>
+              <artifactId>exec-maven-plugin</artifactId>
+              <version>1.2.1</version>
+              <configuration>
+                 <mainClass>com.interpreter.tools.GenerateAST</mainClass>
+                 <arguments>
+                  <argument>${session.executionRootDirectory}/interpreter/src/main/java/com/interpreter/lox</argument>
+                 </arguments>
+              </configuration>
+          </plugin>
+        </plugins>
+      </pluginManagement>
+  </build>
 </project>
