@@ -9,6 +9,11 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
+  <parent>
+    <artifactId>LoxLanguage</artifactId>
+    <groupId>com.interpreter.lox</groupId>
+    <version>0.1.0</version>
+  </parent>
   <dependencyManagement>
     <dependencies>
       <dependency>
