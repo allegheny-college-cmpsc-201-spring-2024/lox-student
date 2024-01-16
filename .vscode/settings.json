@@ -6,5 +6,5 @@
             "debug": false
         }
     ],
-    "maven.view": "flat"
+    "maven.view": "hierarchical"
 }
