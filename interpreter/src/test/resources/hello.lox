@@ -1,5 +1,0 @@
-fun helloWorld() {
-   print "Hello, World!";
-}
-
-helloWorld();

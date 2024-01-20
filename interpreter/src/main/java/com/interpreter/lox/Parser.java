@@ -82,9 +82,10 @@ class Parser {
       initializer = expressionStatement();
     }
     Expr condition = null;
-    if(!check(RIGHT_PAREN)) {
+    if(!check(SEMICOLON)) {
       condition = expression();
     }
+    consume(SEMICOLON, "Expect ';' after loop condition.");
     Expr increment = null;
     if(!check(RIGHT_PAREN)) {
       increment = expression();

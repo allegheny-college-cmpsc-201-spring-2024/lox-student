@@ -4,35 +4,21 @@ setup: |
   echo "🛠️\tCompiling program (mvn compile)"
   mvn compile -q || true
 ---
-- src/main/java/com/interpreter/lox/Main.java:
-  - description: src/main/java/com/interpreter/lox/Main.java exists and contains no TODOs
-    category: Files
-    check: MatchFileFragment
+- description: The interpreter program executes successfully (mvn exec:java)
+  category: Tests
+  check: ExecuteCommand
+  options:
+    command: cd interpreter && mvn exec:java
+- description: Test cases pass; program prints "Hello, World!" (mvn test)
+  category: Tests
+  check: ExecuteCommand
+  options:
+    command: mvn test
+- interpreter/src/test/resources/hello.lox:
+  - description: Program contains at least 3 Lox language comments
+    category: Lox Programming
+    check: CountSingleLineComments
     options:
-      fragment: "TODO"
-      count: 0
-      exact: true
-- src/main/java/com/interpreter/lox/Scanner.java:
-  - description: src/main/java/com/interpreter/lox/Scanner.java exists and contains no TODOs
-    category: Files
-    check: MatchFileFragment
-    options:
-      fragment: "TODO"
-      count: 0
-      exact: true
-- src/main/java/com/interpreter/lox/Token.java:
-  - description: src/main/java/com/interpreter/lox/Token.java exists and contains no TODOs
-    category: Files
-    check: MatchFileFragment
-    options:
-      fragment: "TODO"
-      count: 0
-      exact: true
-- src/main/java/com/interpreter/lox/TokenType.java:
-  - description: src/main/com/java/interpreter/lox/TokenType.java exists and contains no TODOs
-    category: Files
-    check: MatchFileFragment
-    options:
-      fragment: "TODO"
-      count: 0
-      exact: true
+      language: Java
+      count: 3
+      exact: false
