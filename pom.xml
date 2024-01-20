@@ -1,29 +1,24 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project 
+  xmlns="http://maven.apache.org/POM/4.0.0" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+>
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.interpreter.lox</groupId>
-  <artifactId>lox</artifactId>
+  <artifactId>LoxLanguage</artifactId>
+  <name>Lox Language</name>
   <version>0.1.0</version>
-  <name>lox</name>
+  <packaging>pom</packaging>
   <url>https://github.com/allegheny-college-cmpsc-201-spring-2024</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-          <groupId>org.junit</groupId>
-          <artifactId>junit-bom</artifactId>
-          <version>5.10.0</version>
-          <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
   <dependencies>
     <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter</artifactId>
+      <groupId>org.junit</groupId>
+      <artifactId>junit-bom</artifactId>
+      <version>5.10.0</version>
+      <type>pom</type>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -32,45 +27,52 @@
       <version>5.10.0</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-api</artifactId>
+        <version>5.10.0</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-engine</artifactId>
+        <version>5.10.0</version>
+        <scope>test</scope>
+    </dependency>
   </dependencies>
   <build>
     <pluginManagement>
-    <plugins>
-        <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>exec-maven-plugin</artifactId>
-            <version>1.6.0</version>
-            <executions>
-              <execution>
-                <id>execute-lox</id>
-                <phase>compile</phase>
-                <goals>
-                  <goal>java</goal>
-                </goals>
-              </execution>
-            </executions>
+      <plugins>
+          <plugin>
+              <groupId>org.codehaus.mojo</groupId>
+              <artifactId>exec-maven-plugin</artifactId>
+              <version>1.2.1</version>
+              <configuration>
+                  <mainClass>com.interpreter.lox.Main</mainClass>
+              </configuration>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>2.22.2</version>
+            <dependencies>
+                <dependency>
+                    <groupId>org.junit.platform</groupId>
+                    <artifactId>junit-platform-surefire-provider</artifactId>
+                    <version>1.2.0</version>
+                </dependency>
+            </dependencies>
             <configuration>
-                <mainClass>com.interpreter.lox.Main</mainClass>
+              <workingDirectory>${session.executionRootDirectory}/interpreter/src</workingDirectory>
+              <additionalClasspathElements>
+                <additionalClasspathElement>${session.executionRootDirectory}/interpreter/src/test/java/com/interpreter/lox/*Tests.java</additionalClasspathElement>
+              </additionalClasspathElements>
             </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>2.22.2</version>
-          <dependencies>
-               <dependency>
-                   <groupId>org.junit.platform</groupId>
-                   <artifactId>junit-platform-surefire-provider</artifactId>
-                   <version>1.2.0</version>
-               </dependency>
-          </dependencies>
-          <configuration>
-            <additionalClasspathElements>
-    					<additionalClasspathElement>src/test/com/interpreter/lox/*Tests.java</additionalClasspathElement>
-            </additionalClasspathElements>
-    			</configuration>
-        </plugin>
-    </plugins>
+          </plugin>
+      </plugins>
     </pluginManagement>
   </build>
+  <modules>
+    <module>interpreter</module>
+  </modules>
 </project>
