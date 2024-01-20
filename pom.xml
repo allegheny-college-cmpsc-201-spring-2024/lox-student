@@ -45,21 +45,7 @@
   <build>
     <pluginManagement>
       <plugins>
-          <plugin>
-              <groupId>org.codehaus.mojo</groupId>
-              <artifactId>exec-maven-plugin</artifactId>
-              <version>1.4.0</version>
-              <configuration>
-                  <executable>java</executable>
-                  <mainClass>com.interpreter.lox.Main</mainClass>
-                  <arguments>
-                    <argument>${session.executionRootDirectory}/interpreter/src/test/resources/hello.lox</argument>
-                  </arguments>
-                  <additionalClasspathElements>
-                    <additionalClasspathElement>${session.executionRootDirectory}/interpreter/target/classes</additionalClasspathElement>
-                  </additionalClasspathElements>
-              </configuration>
-          </plugin>
+          
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
