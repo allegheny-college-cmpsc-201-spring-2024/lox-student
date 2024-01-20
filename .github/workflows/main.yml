@@ -35,6 +35,14 @@ jobs:
       env:   
         PIPENV_VENV_IN_PROJECT: 1
         PIPENV_IGNORE_VIRTUALENVS: 1
+    - name: Arborist protection
+      id: arborist
+      uses: term-world/arborist@v0.1.5
+      with:
+        branches: '["main", "feedback"]'
+        min-approvals: 1
+        enforce-admins: true
+      if: always()
     - name: Create Wizard report
       id: wizard
       uses: term-world/wizard@v0.6.5
