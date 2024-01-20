@@ -1,14 +1,18 @@
+// Set up global variables
 var lox = "lox";
 var count = 1;
 
+// Create turnaround function
 fun turnAround(count, limit) {
   return count == limit;
 }
 
+// Set up the increment to also decrement
 fun increment(count, delta) {
    return count + delta;
 }
 
+// Make the fish
 fun makeFish(limit) {
    var goBack = false;
    while (count > 0) {
@@ -30,4 +34,5 @@ fun makeFish(limit) {
    }
 }
 
+// Run the fish maker
 makeFish(5);

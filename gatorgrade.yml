@@ -9,12 +9,12 @@ setup: |
   check: ExecuteCommand
   options:
     command: cd interpreter && mvn exec:java
-- description: Test cases pass; program prints "Hello, World!" (mvn test)
+- description: Test cases pass; program prints the fish (mvn test)
   category: Tests
   check: ExecuteCommand
   options:
     command: mvn test
-- interpreter/src/test/resources/hello.lox:
+- interpreter/src/test/resources/fish.lox:
   - description: Program contains at least 3 Lox language comments
     category: Lox Programming
     check: CountSingleLineComments
