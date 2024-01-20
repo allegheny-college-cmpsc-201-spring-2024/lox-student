@@ -48,7 +48,12 @@ class BaseTests {
   void testProgramOutput(String[] args) throws Exception {
     Main.main(args);
     assertEquals(
-      "",
+      "VAR var null\n"
+      + "IDENTIFIER token null\n"
+      + "EQUAL = null\n"
+      + "NUMBER 3.14 3.14\n"
+      + "SEMICOLON ; null\n"
+      + "EOF  null",
       outContent.toString().strip()
     );
   }
