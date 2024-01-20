@@ -35,7 +35,7 @@ class BaseTests {
   }
 
   static Stream<Arguments> testProgramOutput() throws Exception {
-    URL resource = BaseTests.class.getClassLoader().getResource("tokens.lox");
+    URL resource = BaseTests.class.getClassLoader().getResource("hello.lox");
     File file = Paths.get(resource.toURI()).toFile();
     String absPath = file.getAbsolutePath();
     return Stream.of(
@@ -48,12 +48,7 @@ class BaseTests {
   void testProgramOutput(String[] args) throws Exception {
     Main.main(args);
     assertEquals(
-      "VAR var null\n"
-      + "IDENTIFIER token null\n"
-      + "EQUAL = null\n"
-      + "NUMBER 3.14 3.14\n"
-      + "SEMICOLON ; null\n"
-      + "EOF  null",
+      "Hello, World!",
       outContent.toString().strip()
     );
   }
