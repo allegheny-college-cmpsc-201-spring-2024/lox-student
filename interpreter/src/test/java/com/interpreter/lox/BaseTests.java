@@ -35,7 +35,7 @@ class BaseTests {
   }
 
   static Stream<Arguments> testProgramOutput() throws Exception {
-    URL resource = BaseTests.class.getClassLoader().getResource("tokens.lox");
+    URL resource = BaseTests.class.getClassLoader().getResource("test.lox");
     File file = Paths.get(resource.toURI()).toFile();
     String absPath = file.getAbsolutePath();
     return Stream.of(

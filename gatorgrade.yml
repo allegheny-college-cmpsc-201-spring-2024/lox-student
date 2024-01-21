@@ -4,35 +4,48 @@ setup: |
   echo "🛠️\tCompiling program (mvn compile)"
   mvn compile -q || true
 ---
-- src/main/java/com/interpreter/lox/Main.java:
-  - description: src/main/java/com/interpreter/lox/Main.java exists and contains no TODOs
-    category: Files
+- description: The interpreter program executes successfully (mvn exec:java)
+  category: Tests
+  check: ExecuteCommand
+  options:
+    command: cd interpreter && mvn exec:java
+- description: Test cases pass; program handles multi-line comments without breaking other functionality (mvn test)
+  category: Tests
+  check: ExecuteCommand
+  options:
+    command: mvn test
+- interpreter/src/test/resources/test.lox:
+  - description: Program contains at least 1 Lox multi-line comment
+    category: Lox Programming
+    check: CountMultipleLineComments
+    options:
+      language: Java
+      count: 1
+      exact: false
+  - description: Program file contains no TODOs
+    category: TODOs
     check: MatchFileFragment
     options:
-      fragment: "TODO"
+      fragment: TODO
       count: 0
       exact: true
-- src/main/java/com/interpreter/lox/Scanner.java:
-  - description: src/main/java/com/interpreter/lox/Scanner.java exists and contains no TODOs
-    category: Files
+- docs/reflection.md:
+  - description: Reflection contains no TODOs
+    category: TODOs
     check: MatchFileFragment
     options:
-      fragment: "TODO"
+      fragment: TODO
       count: 0
       exact: true
-- src/main/java/com/interpreter/lox/Token.java:
-  - description: src/main/java/com/interpreter/lox/Token.java exists and contains no TODOs
-    category: Files
-    check: MatchFileFragment
+  - description: Reflection responds to all open-ended, free-response prompts
+    category: Reflection
+    check: CountFileParagraphs
     options:
-      fragment: "TODO"
-      count: 0
-      exact: true
-- src/main/java/com/interpreter/lox/TokenType.java:
-  - description: src/main/com/java/interpreter/lox/TokenType.java exists and contains no TODOs
-    category: Files
-    check: MatchFileFragment
+      count: 3
+  - description: Reflection contains adequate number of code fences
+    category: Reflection
+    check: CountMarkdownTags
     options:
-      fragment: "TODO"
-      count: 0
-      exact: true
+      tag: code_block
+      count: 3
+      exact: false
