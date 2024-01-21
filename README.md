@@ -4,7 +4,7 @@ This repository contains an implementation of the Lox programming language inter
 taken directly from the book [_Crafting Interpreters_](https://www.craftinginterpreters.com/)
 by Robert Nystrom. It uses [Apache Maven](https://maven.apache.org/), Apache's build automation
 tool commonly used with Java. Instructions for using this repository exist in the
-[repository wiki](wiki/).
+[repository wiki](../../wiki/).
 
 ## Programmatic content
 
