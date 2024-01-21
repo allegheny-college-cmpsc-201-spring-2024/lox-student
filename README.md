@@ -37,7 +37,7 @@ loxlox
 lox
 ```
 
-Complete this work in the [`interpreter/src/test/resources/fish.lox`](interpreter/src/test/resources/fish.lox) 
+Complete this work in the [`interpreter/src/test/resources/test.lox`](interpreter/src/test/resources/test.lox) 
 file. It must contain:
 
 * fully functional code that achieves the objective outlined above
