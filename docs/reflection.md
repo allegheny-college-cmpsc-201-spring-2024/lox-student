@@ -1,18 +1,31 @@
-# CMPSC 201: Introduction to Lox
+# CMPSC 201: Scanning
 
-`TODO`: Use the template below to respond to the README challenge for this branch. Recall
-that you need `3` features accompanied by examples.
+## Challenge `#2`
 
-## `TODO`: Feature
-
-* Language(s): `TODO`
-
-### Description
-
-`TODO`: Provide a description of the feature and provide an example below.
+### `CoffeeScript`
 
 #### Example
 
+```coffeescript
+// Codem volutpat.
 ```
-// TODO: 
+
+##### Description
+
+Lorem ipsum.
+
+### `Ruby` 
+
+#### Example
+
+```ruby
+// Lorem codem.
 ```
+
+##### Description
+
+Lorem ipsum.
+
+## Challenge `#3`
+
+Lorem ipsum.

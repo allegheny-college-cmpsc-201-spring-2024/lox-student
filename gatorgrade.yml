@@ -47,5 +47,5 @@ setup: |
     check: CountMarkdownTags
     options:
       tag: code_block
-      count: 3
+      count: 2
       exact: false

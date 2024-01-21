@@ -26,17 +26,49 @@ up the Java SDK and runtime in addition to helpful Maven tools for VSCode.
 
 Unless tagged as optional, all challenges below are required by this week's work.
 
-1. Implement multi-line Lox comments such that your program can pass the test case in 
-[interpreter/src/test/resources/test.lox](interpreter/src/test/resources/test.lox).
+1. Implement multi-line Lox comments such that your program can implement them and pass 
+the test case in [interpreter/src/test/resources/test.lox](interpreter/src/test/resources/test.lox).
 
+An example of a multi-line comment in the `C` tradition might look like any of the following:
 
-2. There are likely many conveniences or features that you see missing from Lox. Make
-a list of these in the [reflection.md](docs/reflection.md) document. Include:
+```
+/* This is a comment using multiline, but really isn't */
 
-* at least `3` features that you think would be useful for Lox to have
+/*
+  This is a comment
+  that takes up more
+  than one line
+*/
 
-For each feature:
+/* This is a comment
+   using more than one line
+   but not using extra spaces
+   to delimit the ends */
+```
 
-* a list of languages that implement the feature
-* an explanation of the feature as you understand or use it
-* an example (written in a Markdown `code fence`) from the language(s) you've identified
+Complete this work in the [`interpreter/src/test/resources/test.lox`](interpreter/src/test/resources/test.lox) 
+file. Like last challenge, the file must contain:
+
+* fully functional code that achieves the objective outlined above
+  * i.e. it must pass `mvn test`
+* at least `1` multi-line comment in Lox multiline comment style
+
+`Note`: you cannot _remove_ or _modify_ existing code; your submission should _add_ code to the file. 
+
+2. Nystrom: "Aside from separating tokens—distinguishing `print foo` from `printfoo`—spaces aren’t used for much in most languages. 
+However, in a couple of dark corners, a space does affect how code is parsed in CoffeeScript, Ruby, and the C preprocessor. Where 
+and what effect does it have in each of those languages?"
+s
+For two of the languages above (`CoffeeScript`, `Ruby`): find an example where whitespace matters, and for each language:
+
+* include that example in a Markdown `code fence`
+* write a brief explananation of the effect of whitespace in the example
+
+3. Nystrom: "Our scanner here, like most, discards comments and whitespace since those aren’t needed by the parser. Why might you 
+want to write a scanner that does not discard those? What would it be useful for?"
+
+Keeping mind the examples you found for the question above, consider the last two parts of `#3` and respond under the appropriate
+headings in the reflection document.
+
+Answer both of the above concept-based questions in the [reflection.md](docs/reflection.md) keeping the requirements and tips above
+in mind.
