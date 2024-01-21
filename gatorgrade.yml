@@ -14,11 +14,38 @@ setup: |
   check: ExecuteCommand
   options:
     command: mvn test
-- interpreter/src/test/resources/fish.lox:
+- interpreter/src/test/resources/test.lox:
   - description: Program contains at least 3 Lox language comments
     category: Lox Programming
     check: CountSingleLineComments
     options:
       language: Java
+      count: 3
+      exact: false
+  - description: Program file contains no TODOs
+    category: TODOs
+    check: MatchFileFragment
+    options:
+      fragment: TODO
+      count: 0
+      exact: true
+- docs/reflection.md:
+  - description: Reflection contains no TODOs
+    category: TODOs
+    check: MatchFileFragment
+    options:
+      fragment: TODO
+      count: 0
+      exact: true
+  - description: Reflection responds to all open-ended, free-response prompts
+    category: Reflection
+    check: CountFileParagraphs
+    options:
+      count: 3
+  - description: Reflection contains adequate number of code fences
+    category: Reflection
+    check: CountMarkdownTags
+    options:
+      tag: code_block
       count: 3
       exact: false
