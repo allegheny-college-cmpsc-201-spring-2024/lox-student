@@ -4,7 +4,6 @@ about: Template for Wizard reports
 title: 'Assignment Progress'
 labels: 'bug'
 assignees: ''
-
 ---
 
 # `TODO`s
