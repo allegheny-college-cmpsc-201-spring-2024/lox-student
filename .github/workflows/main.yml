@@ -2,7 +2,7 @@ name: GatorGrader
 
 on:
   push:
-    branches: [main]
+    branches: [1-lox-introduction]
 
 jobs: 
   grade:
