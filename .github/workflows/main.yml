@@ -45,9 +45,10 @@ jobs:
       if: always()
     - name: Create Wizard report
       id: wizard
-      uses: term-world/wizard@v0.6.5
+      uses: term-world/wizard@v0.7.0
       with:
         grader-report: 'gatorgrade_summary.json'
+        report-name: '1: Lox Language'
       if: always()
     env:
       GITHUB_TOKEN: ${{ secrets.WIZARD }}
