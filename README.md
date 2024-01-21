@@ -22,10 +22,11 @@ and intuition about concepts and structures. This content comes in two flavors.
 
 ### Challenges
 
-Each branch's `README` uses the `Challenges` section concluding each chapter as a summative exploration
-of students' grasp of concepts introduced and reviewed in the chapter. Typically, at least once students
-finish the chapter on `parsing`, this takes the shape of requiring students to implement additional 
-language features. These are included in the grader via Maven test cases.
+Each branch's `README` uses the `Challenges` section concluding each chapter of _Crafting Interpreters_ 
+as a summative exploration of students' grasp of concepts introduced and reviewed in the chapter. Typically, 
+at least once students finish the chapter on `parsing`, this takes the shape of requiring students to implement 
+additional language features. These are included in the grader via Maven test cases. In some cases, additional
+challenges have been added to create a deeper learning experience for students.
 
 ### Reflective writing
 
