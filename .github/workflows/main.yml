@@ -45,7 +45,7 @@ jobs:
       if: always()
     - name: Create Wizard report
       id: wizard
-      uses: term-world/wizard@v0.7.0
+      uses: term-world/wizard@v0.7.1
       with:
         grader-report: 'gatorgrade_summary.json'
         report-name: '1: Lox Language'
