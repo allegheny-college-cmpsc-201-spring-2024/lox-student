@@ -47,13 +47,13 @@ An example of a multi-line comment in the `C` tradition might look like any of t
 ```
 
 Our test case lives in the [`interpreter/src/test/resources/test.lox`](interpreter/src/test/resources/test.lox) 
-file. Like last challenge, the file must contain:
+file. 
 
-* fully functional code that achieves the objective outlined above
+This challenge must:
+
+* implement a multi-line comment in our test `Lox` file
+* implement fully functional code in [interpreter/src/main/java/com/interpreter/lox/Scanner.java](interpreter/src/main/java/com/interpreter/lox/Scanner.java) that achieves the objective outlined above
   * i.e. it must pass `mvn test`
-* at least `1` multi-line comment in Lox multiline comment style
-
-`Note`: you cannot _remove_ or _modify_ existing code; your submission should _add_ code to the `Lox` interpreter (you'll be working in the Java files).
 
 2. Nystrom: "Aside from separating tokens—distinguishing `print foo` from `printfoo`—spaces aren’t used for much in most languages. 
 However, in a couple of dark corners, a space does affect how code is parsed in CoffeeScript, Ruby, and the C preprocessor. Where 
