@@ -53,7 +53,7 @@ file. Like last challenge, the file must contain:
   * i.e. it must pass `mvn test`
 * at least `1` multi-line comment in Lox multiline comment style
 
-`Note`: you cannot _remove_ or _modify_ existing code; your submission should _add_ code to the file. 
+`Note`: you cannot _remove_ or _modify_ existing code; your submission should _add_ code to the `Lox` interpreter (you'll be working in the Java files).
 
 2. Nystrom: "Aside from separating tokens—distinguishing `print foo` from `printfoo`—spaces aren’t used for much in most languages. 
 However, in a couple of dark corners, a space does affect how code is parsed in CoffeeScript, Ruby, and the C preprocessor. Where 
