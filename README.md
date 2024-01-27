@@ -32,7 +32,7 @@ the test case in [interpreter/src/test/resources/test.lox](interpreter/src/test/
 An example of a multi-line comment in the `C` tradition might look like any of the following:
 
 ```
-/* This is a comment using multiline, but really isn't */
+/* This is a comment using multiline, but isn't multiple lines */
 
 /*
   This is a comment
@@ -46,7 +46,7 @@ An example of a multi-line comment in the `C` tradition might look like any of t
    to delimit the ends */
 ```
 
-Complete this work in the [`interpreter/src/test/resources/test.lox`](interpreter/src/test/resources/test.lox) 
+Our test case lives in the [`interpreter/src/test/resources/test.lox`](interpreter/src/test/resources/test.lox) 
 file. Like last challenge, the file must contain:
 
 * fully functional code that achieves the objective outlined above
