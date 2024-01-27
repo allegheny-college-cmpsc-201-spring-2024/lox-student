@@ -79,11 +79,6 @@ class Scanner {
       case '/':
         if (match('/')) {
           while (peek() != '\n' && !isAtEnd()) advance();
-        // TODO: Remove from program before giving to students
-        } else if (match('*')) {
-          while (peek() != '/' && !isAtEnd()) advance();
-          advance();
-        // TODO: Remove from program before giving to students
         } else {
           addToken(SLASH);
         }
