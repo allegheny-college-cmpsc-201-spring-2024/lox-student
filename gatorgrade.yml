@@ -9,24 +9,46 @@ setup: |
   check: ExecuteCommand
   options:
     command: cd interpreter && mvn exec:java
-- description: Test cases pass; program handles multi-line comments without breaking other functionality (mvn test)
+- description: Comma expression production rule functions correctly
   category: Tests
   check: ExecuteCommand
   options:
-    command: mvn test
-- interpreter/src/test/resources/test.lox:
-  - description: Program contains at least 1 Lox multi-line comment
-    category: Lox Programming
-    check: CountMultipleLineComments
-    options:
-      language: Java
-      count: 1
-      exact: false
-  - description: Program file contains no TODOs
+    command: mvn test -Dtest=BaseTests#testCommaOperator -f "interpreter/pom.xml"
+- description: Ternary expression production rule functions correctly
+  category: Tests
+  check: ExecuteCommand
+  options:
+    command: mvn test -Dtest=BaseTests#testTernaryExpr -f "interpreter/pom.xml"
+- interpreter/src/main/java/com/interpreter/lox/Parser.java:
+  - description: Parser.java contains no TODOs
     category: TODOs
     check: MatchFileFragment
     options:
-      fragment: TODO
+      fragment: "TODO"
+      count: 0
+      exact: true
+- interpreter/src/main/java/com/interpreter/lox/TokenType.java:
+  - description: TokenType.java contains no TODOs
+    category: TODOs
+    check: MatchFileFragment
+    options:
+      fragment: "TODO"
+      count: 0
+      exact: true
+- interpreter/src/main/java/com/interpreter/lox/ASTPrinter.java:
+  - description: ASTPrinter.java contains no TODOs
+    category: TODOs
+    check: MatchFileFragment
+    options:
+      fragment: "TODO"
+      count: 0
+      exact: true
+- interpreter/src/main/java/com/interpreter/lox/Scanner.java:
+  - description: Scanner.java contains no TODOs
+    category: TODOs
+    check: MatchFileFragment
+    options:
+      fragment: "TODO"
       count: 0
       exact: true
 - docs/reflection.md:
@@ -37,15 +59,3 @@ setup: |
       fragment: TODO
       count: 0
       exact: true
-  - description: Reflection responds to all open-ended, free-response prompts
-    category: Reflection
-    check: CountFileParagraphs
-    options:
-      count: 3
-  - description: Reflection contains adequate number of code fences
-    category: Reflection
-    check: CountMarkdownTags
-    options:
-      tag: code_block
-      count: 2
-      exact: false

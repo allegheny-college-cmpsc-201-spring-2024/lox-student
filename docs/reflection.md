@@ -1,34 +1,27 @@
-# CMPSC 201: Scanning
+# CMPSC 201: Parsing Expressions
 
-## Challenge `#2`
-
-* `TODO`: Use the template below to respond to `README` Challenge `#2` for this branch. Recall
-that you need `2` examples and explanations for languages defined in the `README`.
-
-### `CoffeeScript`
-
-#### Example
-
-```coffeescript
-// TODO: 
+1. Write the `comma` production rule below.
+```
+TODO: Comma production rule
 ```
 
-##### Description
-
-`TODO`: Provide a description of the example above.
-
-### `Ruby` 
-
-#### Example
-
-```ruby
-// TODO:
+2. Write the `ternary` production rule.
+```
+TODO: Ternary production rule
 ```
 
-##### Description
-
-`TODO`: Provide a description of the example above.
-
-## Challenge `#3`
-
-* `TODO`: Respond to `README` Challenge `#3` in the space below.
+3. Add the `comma` and `ternary` production rules to the correct spot in the processing hierarcy below:
+```
+TODO: Remove this line, add comma and ternary production rules at the correct spots
+expression     → equality ;
+assignment     → IDENTIFIER "=" assignment
+               | comma ;
+equality       → comparison ( ( "!=" | "==" ) comparison )* ;
+comparison     → term ( ( ">" | ">=" | "<" | "<=" ) term )* ;
+term           → factor ( ( "-" | "+" ) factor )* ;
+factor         → unary ( ( "/" | "*" ) unary )* ;
+unary          → ( "!" | "-" ) unary
+               | primary ;
+primary        → NUMBER | STRING | "true" | "false" | "nil"
+               | "(" expression ")" ;
+```

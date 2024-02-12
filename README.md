@@ -1,9 +1,12 @@
-# The Lox Programming Language: Introduction
+# The Lox Programming Language: Grammar
 
-This branch mirrors content from chapter `4` of _Crafting Interpreters_, which introduces the tokens
-of the Lox language. These are the building blocks of what the language's `Parser` will use; think
-of them like words that have meaning or purpose in and of themselves which can make sentences, but
-aren't really up for coherent paragraphs yet.
+This branch mirrors content from chapter `6` of _Crafting Interpreters_. In pursuit of implementing
+our ability to parse expressions for content, these exercises consider _precedence_ and additional
+implications of our productions rules, derivations, and grammar.
+
+This week's work expands and complicates a software design pattern common to interpreters and
+compilers: the `Visitor` pattern. Understanding this pattern constitutes a key concept in at
+least this interpreter's implementation. 
 
 For a primer on the language's general syntax and usage, refer to 
 [Crafting Interpreters, Chapter 3](https://www.craftinginterpreters.com/the-lox-language.html).
@@ -14,7 +17,7 @@ This assignment directly addresses the following course learning objectives:
 
 * Correctly identify and describe the steps in the design and implementation of a programming language
 * Interpret and use an existing programming language grammar
-* Design, implement, and evaluate a correct scanner and parser for a programming language
+* Using knowledge of the general principles of programming languages, correctly implement a computer program in a heretofore unknown programming language
 
 ## Using this repository
 
@@ -26,49 +29,34 @@ up the Java SDK and runtime in addition to helpful Maven tools for VSCode.
 
 Unless tagged as optional, all challenges below are required by this week's work.
 
-1. Implement multi-line Lox comments such that your program can implement them and pass 
-the test case in [interpreter/src/test/resources/test.lox](interpreter/src/test/resources/test.lox).
+### Challenge 1
 
-An example of a multi-line comment in the `C` tradition might look like any of the following:
+Many languages implement the ability to parse multiple expressions as part of the assignment process. Before
+we assign expressions as interpretable objects, we need to understand how to prioritize and separate expressions.
+Here, Nystrom points out the [comma operator](https://en.wikipedia.org/wiki/Comma_operator) as the main mechanism
+for this kind of multiple assignment.
 
+Implementing this operator helps us learn about _precedence_. Your task is to work across a few files to implement
+the comma operator. To complete this, you'll need to think back to our experience with tokens to full complete it.
+Mostly, we'll be working in:
+
+* [Parser.java](interpreter/src/main/java/com/interpreter/lox/Parser.java)
+* [ASTPrinter.java](interpreter/src/main/java/com/interpreter/lox/ASTPrinter.java)
+
+Your program should correctly interpret the expressions in [test.lox](interpreter/src/test/resources/test.lox).
+
+### Challenge 2
+
+To further explore concepts this week, implement _ternary_ expressions for `Lox`. The example from our `test.lox`:
 ```
-/* This is a comment using multiline, but isn't multiple lines */
-
-/*
-  This is a comment
-  that takes up more
-  than one line
-*/
-
-/* This is a comment
-   using more than one line
-   but not using extra spaces
-   to delimit the ends */
+a == 1 ? true : false
 ```
+evaluates to "If `a` is `1`, return `true`, else `false`. For our ternary expressions, your parser should process
+anything with two branches as `if-else` statements and anything only one as an `if` statement.
 
-Our test case lives in the [`interpreter/src/test/resources/test.lox`](interpreter/src/test/resources/test.lox) 
-file. 
+To complete this work, you'll need to _add_ tokens to our language, so you'll be working in `4` files:
 
-This challenge must:
-
-* implement a multi-line comment in our test `Lox` file
-* implement fully functional code in [interpreter/src/main/java/com/interpreter/lox/Scanner.java](interpreter/src/main/java/com/interpreter/lox/Scanner.java) that achieves the objective outlined above
-  * i.e. it must pass `mvn test`
-
-2. Nystrom: "Aside from separating tokens—distinguishing `print foo` from `printfoo`—spaces aren’t used for much in most languages. 
-However, in a couple of dark corners, a space does affect how code is parsed in CoffeeScript, Ruby, and the C preprocessor. Where 
-and what effect does it have in each of those languages?"
-s
-For two of the languages above (`CoffeeScript`, `Ruby`): find an example where whitespace matters, and for each language:
-
-* include that example in a Markdown `code fence`
-* write a brief explananation of the effect of whitespace in the example
-
-3. Nystrom: "Our scanner here, like most, discards comments and whitespace since those aren’t needed by the parser. Why might you 
-want to write a scanner that does not discard those? What would it be useful for?"
-
-Keeping mind the examples you found for the question above, consider the last two parts of `#3` and respond under the appropriate
-headings in the reflection document.
-
-Answer both of the above concept-based questions in the [reflection.md](docs/reflection.md) keeping the requirements and tips above
-in mind.
+* [Parser.java](interpreter/src/main/java/com/interpreter/lox/Parser.java)
+* [TokenType.java](interpreter/src/main/java/com/interpreter/lox/TokenType.java)
+* [ASTPrinter.java](interpreter/src/main/java/com/interpreter/lox/ASTPrinter.java)
+* [Scanner.java](interpreter/src/main/java/com/interpreter/lox/Scaner.java)

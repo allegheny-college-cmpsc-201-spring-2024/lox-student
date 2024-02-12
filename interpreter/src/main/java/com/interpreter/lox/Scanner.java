@@ -64,6 +64,7 @@ class Scanner {
       case '+': addToken(PLUS); break;
       case ';': addToken(SEMICOLON); break;
       case '*': addToken(STAR); break;
+      // TODO: Add cases to handle new token for ternary operations
       case '!':
         addToken(match('=') ? BANG_EQUAL : BANG);
         break;
@@ -79,6 +80,9 @@ class Scanner {
       case '/':
         if (match('/')) {
           while (peek() != '\n' && !isAtEnd()) advance();
+        } else if (match('*')) {
+          while (peek() != '/' && !isAtEnd()) advance();
+          advance();
         } else {
           addToken(SLASH);
         }
