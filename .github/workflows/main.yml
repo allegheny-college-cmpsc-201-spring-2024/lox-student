@@ -2,19 +2,45 @@ name: GatorGrader
 
 on:
   push:
-    branches: [main]
+    branches: [3-representing-code]
 
 jobs: 
   grade:
     runs-on: ubuntu-latest
     steps:
-    - name: Arborist protection
-      id: arborist
-      uses: term-world/arborist@v0.1.5
+    - uses: actions/checkout@v4
+      with: 
+        fetch-depth: '0'
+    - name: Setup Maven
+      if: always()
+      run: |
+        sudo apt-get install default-jre
+        sudo apt-get install default-jdk
+        sudo apt-get install maven
+        mvn install
+    - name: Setup Python
+      if: always()
+      uses: actions/setup-python@v4
       with:
-        branches: '["main", "feedback"]'
-        min-approvals: 1
-        enforce-admins: true
+        python-version: 3.10.6
+    - name: Set up grading environment
+      run: |
+        sudo apt-get update
+        sudo python -m pip install --upgrade pip
+        sudo python -m pip install gatorgrade --ignore-installed PyYAML
+    - name: Grade repository
+      run: |
+        gatorgrade --config gatorgrade.yml --report file json gatorgrade_summary.json
+      if: always()
+      env:   
+        PIPENV_VENV_IN_PROJECT: 1
+        PIPENV_IGNORE_VIRTUALENVS: 1
+    - name: Create Wizard report
+      id: wizard
+      uses: term-world/wizard@v0.7.4
+      with:
+        grader-report: 'gatorgrade_summary.json'
+        report-name: '3 - Representing Code'
       if: always()
     env:
       GITHUB_TOKEN: ${{ secrets.WIZARD }}

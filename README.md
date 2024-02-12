@@ -1,73 +1,92 @@
-# The Lox Programming Language
+# The Lox Programming Language: Grammar
 
-This repository contains an implementation of the Lox programming language interpreter
-taken directly from the book [_Crafting Interpreters_](https://www.craftinginterpreters.com/)
-by Robert Nystrom. It uses [Apache Maven](https://maven.apache.org/), Apache's build automation
-tool commonly used with Java. Instructions for using this repository exist in the
-[repository wiki](../../wiki/).
+This branch mirrors content from chapter `5` of _Crafting Interpreters_. Here, we're concerned
+with putting together the "words" we've learned into fuller expressions described by the `Lox`
+language's _grammar_. We'll explore how formal languages enforce their rules beyond scanning
+for the "form"-level validation of tokens by implementing the idea of "production rules," which
+describe tokens come together to produce statements and expressions.
 
-## Programmatic content
+This week's work introduces and explains a software design pattern common to interpreters and
+compilers: the `Visitor` pattern. Understanding this pattern constitutes a key concept in at
+least this interpreter's implementation. 
 
-Intended as the main educational tool for `CMPSC 201: Programming Languages` at Allegheny College,
-this repository adopts a branched structureeach chapter, and the name and semantic versioning for each 
-build represents the chapter from which the code was taken. Branches contain all code from preceding
-chapters except where the current chapter modifies it to introduce new features or remedy issues 
-created in previous exercises.
+For a primer on the language's general syntax and usage, refer to 
+[Crafting Interpreters, Chapter 3](https://www.craftinginterpreters.com/the-lox-language.html).
 
-## Educational content
+## Notes about the chapter
 
-Given that this repository accompanies the pedagogical Lox language _and_ textbook introducing that 
-language, each branch contains educational content to help learners demonstrate their understanding
-and intuition about concepts and structures. This content comes in two flavors.
+### `ASTPrinter.java`
 
-### Challenges
+At the end of the chapter Nystrom writes:
 
-Each branch's `README` uses the `Challenges` section concluding each chapter of _Crafting Interpreters_ 
-as a summative exploration of students' grasp of concepts introduced and reviewed in the chapter. Typically, 
-at least once students finish the chapter on `parsing`, this takes the shape of requiring students to implement 
-additional language features. These are included in the grader via Maven test cases. In some cases, additional
-challenges have been added to create a deeper learning experience for students.
+> You can go ahead and delete this method. We won’t need it. Also, as we add new syntax tree types, 
+> I won’t bother showing the necessary visit methods for them in AstPrinter. If you want to (and you 
+> want the Java compiler to not yell at you), go ahead and add them yourself. It will come in handy 
+> in the next chapter when we start parsing Lox code into syntax trees. Or, if you don’t care to maintain 
+> AstPrinter, feel free to delete it. We won’t need it again.
 
-### Reflective writing
+Don't follow the book's advice here: _keep everything currently in `ASTPrinter`_! It's important to our work.
 
-This repository caters to a course held in the 
-[Department of Computer and Information Science (CIS)](https://www.cis.allegheny.edu/) at Allegheny College.
-Department pedagogy includes student reflective writing which explores concepts qualitatively, often asking
-students to engage in speculation, exercise their intuition, or write about their understandings or
-experiences engaging with a topic. These documents are included in the `docs` folder in each branch and 
-are also included in the grader's setup, namely by guaranteeing that questions are finished.
+### `Expr.java`
 
-## Notes on software supporting this repository
+The `Expr.java` file doesn't exist...yet. You will need to _make it_. However, you've got a tool whose entire
+purpose is to manufacture this file without any action on your part. If you look at your `Maven` window, you'll
+probably notice the `AST Generator` below the `Interpreter`. Run the `exec:java` favorite
+there and the `Expr.java` file will create itself in the `Interpreter`'s file path.
 
-### GatorGrade
+## Learning objectives
 
-[GatorGrade](https://github.com/GatorEducator/gatorgrade) is a command-line automated grading system (AGS) developed
-by Allegheny College faculty and students. For more information on installing and using the system, visit
-the link provided.
+This assignment directly addresses the following course learning objectives:
 
-All build in this repository, however, automatically installs and configures GatorGrade in its GitHub Actions
-workflows. Educators and their students are invited to install the software on their machines to gain the 
-full range of benefits associated withe just-in-time (JIT) style of feedback it provides via specifications
-grading practices.
+* Correctly identify and describe the steps in the design and implementation of a programming language
+* Interpret and use an existing programming language grammar
+* Using knowledge of the general principles of programming languages, correctly implement a computer program in a heretofore unknown programming language
 
-### Wizard
+## Using this repository
 
-[Wizard](https://github.com/term-world/wizard) provides actionable issues to students based on the outcome of 
-their GatorGrader reports via the GitHub issue tracker. When students `push` content to their GitHub repo remotes,
-the tool uses the results of GatorGrade to post an issue detailing all of the objectives they have completed and
-those that they have not yet achieved in the form of issue-based tasks.
-
-### Arborist
-
-[Arborist](https://github.com/term-world/arborist) protects branches from accidental or haphazard `merge`s. Used
-here to protect the `main` and `feedback` (created by GitHub Classroom) branches. Sometimes students merge these
-with other branches and create very tangled webs. The Arborist prevents this.
-
-## Notes on repository setup
-
-The repository's Maven configuration works from the command line, setup included contemplates
+While the repository's Maven configuration works from the command line, setup included contemplates
 the content of the [Getting Started guide](wiki/Getting-Started), which outlines how to set
-up the Java SDK and runtime in addition to helpful Maven tools for VSCode. In addition, this
-repository's Wiki outlines some of the common Apache Maven lifecycle commands used in compiling,
-testing and executing the code for the book, outlined in the 
-[Compiling and Testing Java Programs](wiki/Compiling-and-Testing-Java-Programs) entry.
+up the Java SDK and runtime in addition to helpful Maven tools for VSCode.
+
+## Challenges
+
+Unless tagged as optional, all challenges below are required by this week's work.
+
+### Challenge 1
+
+Nystrom presents us with the following hypothetical production rule:
+```
+expr → expr ( "(" ( expr ( "," expr )* )? ")" | "." IDENTIFIER )+
+     | IDENTIFIER
+     | NUMBER
+```
+Admittedly, as the author writes, there are several "tricks" here to make the grammar of it more compact.
+If `*`, `|`, `+`, and `?` are "syntactical sugar" (i.e., programmatic shorthand), how many different 
+individual production rules does this single rule encode? What are some examples of how they might occur
+in the `Lox` language? Provide examples for each derivation.
+* Note: this production rule accounts for _several_ (i.e. more than 3) different derivations
+* Respond to this question in the [reflection.md](docs/reflection.md) using individual code fences
+for each example
+
+### Challenge 2
+
+Our Code Golf exercise from last week worked in the Scheme language which used "normal Polish notation" 
+(NPN), e.g., `(+ 1 2)` to represent `2 + 1`. Reverse Polish notation (RPN) would represent this differently: 
+`(1 2 +)`. Our `ASTPrinter` file contains an additional `RPNPrinter` class which should produce statements 
+in RPN rather than the current modified `Lox` NPN. 
+
+To test, let's consider the following connundrum:
+* There exists an expression whose `RPN` representation is: `10.0 6.0 9.0 3.0 + 11.0 - * / * 17.0 + 5.0 +`
+  * Program the appropriate `Lox` equivalent in the `test.lox` file
+    * Use the expression only; no need for a `var ... =` prefix
+  * `Hint`: Its result, when calculated, _would be_ `22`
+
+* Work in: 
+  * [ASTPrinter.java](interpreter/src/main/java/com/interpreter/lox/ASTPrinter.java) to complete the `RPN` representation
+  * [test.lox](interpreter/src/test/resources/test.lox) to write the correct arithmetic expression
+
+#### Testing
+
+To test your `RPN` representation, you might use the book's suggested example: `(1 + 2) * (4 - 3)`, which 
+resolves to a reverse Polish notation form: `1 2 + 4 3 -`. You may think of others to try as well!
+
