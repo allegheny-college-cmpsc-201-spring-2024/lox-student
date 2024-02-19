@@ -1,0 +1,11 @@
+// Variables created, not initialized 
+var a;
+var b;
+var c = 3;
+var d;
+
+a = "assigned";
+print a; // OK, was assigned first  
+print c; 
+
+print b; // Not OK; hasn't been assigned

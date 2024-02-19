@@ -1,19 +1,32 @@
-# CMPSC 201: Evaluating Expressions
+# CMPSC 201: Parsing Statements
 
-1. Describe Java's implementation of the divide-by-zero operation. Why does this happen?
+Consider the following `Lox` program:
+```
+var a = 1;
+{
+  var a = a + 2;
+  print a;
+}
+```
 
-> Hint: This may require some looking-up/reading.
-
-`TODO: Respond to the question above.`
-
-2. Identify and describe at least two additional unique ways that other languages implement divide-by-zero.
-
-`TODO: Respond to the question above.`
-
-3. How do language design principles affect or influence the above `3` ways of implementing the calculation?
-
-`TODO: Respond to the question above for all three language examples.`
-
-4. Is there any reason to consider _not_ throwing an error if we encounter an instance of divide-by-zero? If so, what is it?
+1. What do you think the code does?
 
 `TODO: Respond to the question above.`
+
+2. Is that in line with what you think it _should_ do? Why or why not?
+
+`TOOD: Respond to the question above.`
+
+3. Code the same situation in Python. How does that one differ in form and function?
+```python
+TODO: Provide example from another language
+```
+`TODO: Explain how it does or doesn't differ from the Lox code`
+
+4. What does the code at the top _actually_ do? How did it compare with your `Python` version?
+
+`TODO: Respond to the question above.
+
+5. What kind of behavior _should_ the code have?
+
+As the book's author comments, this should probably be an error.

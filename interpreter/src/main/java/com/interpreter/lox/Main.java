@@ -53,6 +53,9 @@ public class Main {
   }
 
   private static void runPrompt() throws IOException {
+    // TODO: Modify to interpret a statement to reduce to an
+    //       expression, adding statements to a list of statments
+    //       to interpret later or interpret an individual expression _now_.
     InputStreamReader input = new InputStreamReader(System.in);
     BufferedReader reader = new BufferedReader(input);
     for (;;) {
@@ -68,19 +71,17 @@ public class Main {
     Scanner scanner = new Scanner(source);
     List<Token> tokens = scanner.scanTokens();
     Parser parser = new Parser(tokens);
-    Expr expression = parser.parse();
+    List<Stmt> statements = parser.parse();
     if (hadError) return;
-    interpreter.interpret(expression);
+    interpreter.interpret(statements);
   }
 
   public static void main(String[] args) throws IOException {
-    if (args.length > 3) {
+    if (args.length > 1) {
       System.out.println("Usage: jlox [script]");
       System.exit(64);
-    } else if (args.length >= 1) {
-      for(String file : args){
-          runFile(file);
-      }
+    } else if (args.length == 1) {
+      runFile(args[0]);
     } else {
       runPrompt();
     }

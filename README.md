@@ -1,12 +1,15 @@
-# The Lox Programming Language: Grammar
+# The Lox Programming Language: Statements
 
-This branch mirrors content from chapter `7` of _Crafting Interpreters_. To date, our interpreter
-provides precedence and order of operations; we're aware of the ways that grammars tell a language
-to process its expressions, but blissfully ignorant of how they do so. In so far as arithmetic
-expressions are concerned, this chapter addresses one half of the parsing task: computation in `Lox`.
+This branch mirrors content from chapter `8` of _Crafting Interpreters_. Finally, we'll be able
+to fully parse statements. Here, we're looking to retread some of the ideas we covered in previous
+chapters while considering expression grammar. Having moved from scanning (lexing) to parsing, the
+last step in our journey toward code that executes in a recognizable way is _interpreting statements_.
 
-For a primer on the language's general syntax and usage, refer to 
-[Crafting Interpreters, Chapter 3](https://www.craftinginterpreters.com/the-lox-language.html).
+> Note: `mvn exec:java` does something different this week than it has in the past. Take a look at 
+> [Challenge 1](#challenge-1) below for more information.
+
+This exercise will use the `Lox` programming language. For a primer on the language's general syntax and usage, 
+refer to  [Crafting Interpreters, Chapter 3](https://www.craftinginterpreters.com/the-lox-language.html).
 
 ## Learning objectives
 
@@ -14,7 +17,7 @@ This assignment directly addresses the following course learning objectives:
 
 * Correctly identify and describe the steps in the design and implementation of a programming language
 * Interpret and use an existing programming language grammar
-* Design, implement, and evaluate a correct scanner and parser for a programming language.
+* Using knowledge of the general principles of programming languages, correctly implement a computer program in a heretofore unknown programming language
 
 ## Using this repository
 
@@ -28,39 +31,66 @@ Unless tagged as optional, all challenges below are required by this week's work
 
 ### Challenge 1
 
-In many languages, arithmetic operators can perform _non-arithmetic_ tasks. For example, the following Python operations
-allow string manipulation for non-numeric literals:
-```python
-# String concatenation
-lox = "lox" + "lox"
-lox = "lox" * 2
-```
-`Lox` doesn't possess these features..._yet_. Your task is two-fold: to implement both the `+` and `*` operators in the
-context of computing `string`s in `Lox`. Each should function similar to their counterpart operators in `Python`. To
-implement functionalty for these operators, work in the `visitBinaryExpr` method of `Interpreter.java`.
+> Note: this task is something that can't be auto-graded; as such, the check for it will
+> fail until the instructor runs a manual test after the due date. However, to test, you
+> can use `var a = 1; {var a = a + 2; print a; 2 + 2;}` and any basic arithmetic to see
+> if your solution works.
 
+To this point, we've run files through the interpreter in order to test our various explorations and
+improvements. But did you know that, like `Python`, `Lox` has an interactive mode? (This is commonly
+referred to as a `REPL` -- a `R`ead `E`valuate `P`rint `L`oop.)
 
-Given that we're not up to parsing multiple expressions yet, we need to work in distinct files to test these challenges:
+Our work this week has removed some of its previous flexibility; for example, we can't input single 
+expressions and return results anymore! Our job is to restore that functionality so that expressions 
+_and_ statements work -- functionality similiar to what happens if we type `python` at the command line
+and write code.
 
-|Operator |File |
-|:--------|:----|
-|`+` | [plus.lox](interpreter/src/test/resources/plus.lox) |
-|`*` | [star.lox](interpreter/src/test/resources/star.lox) |
+This particular task has several possible paths for implementation:
+
+* try to parse the input as a statement
+  * if the parser encounters an error, then try to parse as an expression
+  * if that didn't work, it's probably bad syntax
+
+* Add a new object to our parser to control statements entered into the `REPL` (the interactive mode)
+  * This might modify at least the following files:
+    * `Parser.java`
+    * `Interpreter.java`
+    * `Main.java`
 
 ### Challenge 2
 
-At present, if we divide by `0`, it appears that what happens...shouldn't. At all. Ever. It's practically universe-ending. However,
-it shows that  different programming languages interpret the divide by zero operation in unique ways.
+Traditionally, programming languages raise errors when accessing variables which have been _defined_,
+but not _assigned_. `Lox`, at least as is designed now, _doesn't_ follow this rule. It's probably better
+that it _does_. For example (taken from Nystrom's book):
+```
+// Variables created, not initialized
+var a;
+var b;
 
-As policy in the `Lox` language, we should emit an error if this case ever occurs. 
+a = "assigned";
+print a; // OK, was assigned first
 
-This task is three-fold:
+print b; // Not OK; hasn't been assigned.
+```
+Force the interpreter to produce a `RuntimeError` in the above situation. This assignment partly bases its test
+case for this challenge on the code above. You can find out more by looking at the code the test case runs:
 
-1. describe why Java interprets the operation the way it does, and
-2. identify at least two unique ways that other programming languages handle the case
-3. implement the above-defined behavior in the interpreter
+* [interpreter/src/test/resources/test.lox](interpreter/src/test/resources/test.lox)
 
-Parts `1` and `2` should be completed in your [reflection.md](docs/reflection.md) file. Implement Part `3` in by editing the `visitBinaryExpr` 
-method of `Interpreter.java` to throw an error.
+### Challenge 3
 
-Your program should correctly interpret the expression in [divide.lox](interpreter/src/test/resources/divide.lox).
+Consider the following program:
+```
+var a = 1;
+{
+  var a = a + 2;
+  print a;
+}
+```
+In the [docs/reflection.md](reflection.md) document, answer a few questions, namely:
+
+* What do you think the code does?
+* Is that in line with what you think it _should_ do?
+* Code the same situation in another language. How does that one differ in form and function?
+* What does it _actually_ do?
+* Is that the best design approach? Why or why not?
