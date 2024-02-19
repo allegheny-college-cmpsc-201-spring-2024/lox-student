@@ -10,7 +10,10 @@ import java.util.List;
 
 public class Main {
 
+  public static final Interpreter interpreter = new Interpreter();
+
   static boolean hadError = false;
+  static boolean hadRuntimeError = false;
 
   static void error(int line, String message) {
     report(line, "", message);
@@ -22,6 +25,12 @@ public class Main {
     } else {
       report(token.line, " at '" + token.lexeme + "'", message);
     }
+  }
+
+  static void runtimeError(RuntimeError error) {
+    System.err.println(error.getMessage() +
+      "\n[line " + error.token.line + "]");
+    hadRuntimeError = true;
   }
 
   private static void report(int line, String where, String message) {
@@ -36,6 +45,10 @@ public class Main {
     run(new String(bytes, Charset.defaultCharset()));
     if (hadError) {
       System.exit(65);
+    }
+    if (hadRuntimeError) {
+        throw new IOException();
+        //System.exit(70);
     }
   }
 
@@ -57,16 +70,17 @@ public class Main {
     Parser parser = new Parser(tokens);
     Expr expression = parser.parse();
     if (hadError) return;
-    System.out.println("AST: " + new ASTPrinter().print(expression));
-    System.out.println("RPN: " + new RPNPrinter().print(expression));
+    interpreter.interpret(expression);
   }
 
   public static void main(String[] args) throws IOException {
-    if (args.length > 1) {
+    if (args.length > 3) {
       System.out.println("Usage: jlox [script]");
       System.exit(64);
-    } else if (args.length == 1) {
-      runFile(args[0]);
+    } else if (args.length >= 1) {
+      for(String file : args){
+          runFile(file);
+      }
     } else {
       runPrompt();
     }

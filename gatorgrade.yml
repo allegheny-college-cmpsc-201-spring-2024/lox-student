@@ -4,18 +4,23 @@ setup: |
   echo "🛠️\tCompiling program (mvn compile)"
   mvn compile -q || true
 ---
-- description: The interpreter program executes successfully (mvn exec:java)
+- description: Divide by zero throws a RuntimeError
   category: Tests
   check: ExecuteCommand
   options:
-    command: cd interpreter && mvn exec:java
-- description: Test cases pass; both AST and RPN representations are correct
+    command:  mvn test -Dtest=BaseTests#testThrownError -f "interpreter/pom.xml"
+- description: String concatenation works correctly
   category: Tests
   check: ExecuteCommand
   options:
-    command: mvn test
-- interpreter/src/test/resources/test.lox:
-  - description: test.lox program contains no TODOs
+    command: mvn test -Dtest=BaseTests#testPlusOperator -f "interpreter/pom.xml"
+- description: String multiplication works correctly
+  category: Tests
+  check: ExecuteCommand
+  options:
+    command: mvn test -Dtest=BaseTests#testStarOperator -f "interpreter/pom.xml"
+- interpreter/src/main/java/com/interpreter/lox/Interpreter.java:
+  - description: Interpreter.java contains no TODOs
     category: TODOs
     check: MatchFileFragment
     options:
@@ -28,31 +33,5 @@ setup: |
     check: MatchFileFragment
     options:
       fragment: TODO
-      count: 0
-      exact: true
-  - description: Reflection contains adequate number of code fences
-    category: Reflection
-    check: CountMarkdownTags
-    options:
-      tag: code_block
-      count: 6
-      exact: false
-- interpreter/src/main/java/com/interpreter/lox/Expr.java:
-  - description: Expr.java file exists (AST generated)
-    category: AST
-    check: ConfirmFileExists
-- interpreter/src/main/java/com/interpreter/lox/ASTPrinter.java:
-  - description: ASTPrinter.java contains no TODOs
-    category: TODOs
-    check: MatchFileFragment
-    options:
-      fragment: "TODO"
-      count: 0
-      exact: true
-  - description: ASTPrinter.java implements RPN without using System.out.println
-    category: AST
-    check: MatchFileFragment
-    options:
-      fragment: "System.out.print"
       count: 0
       exact: true

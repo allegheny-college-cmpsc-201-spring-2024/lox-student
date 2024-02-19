@@ -1,38 +1,12 @@
 # The Lox Programming Language: Grammar
 
-This branch mirrors content from chapter `5` of _Crafting Interpreters_. Here, we're concerned
-with putting together the "words" we've learned into fuller expressions described by the `Lox`
-language's _grammar_. We'll explore how formal languages enforce their rules beyond scanning
-for the "form"-level validation of tokens by implementing the idea of "production rules," which
-describe tokens come together to produce statements and expressions.
-
-This week's work introduces and explains a software design pattern common to interpreters and
-compilers: the `Visitor` pattern. Understanding this pattern constitutes a key concept in at
-least this interpreter's implementation. 
+This branch mirrors content from chapter `7` of _Crafting Interpreters_. To date, our interpreter
+provides precedence and order of operations; we're aware of the ways that grammars tell a language
+to process its expressions, but blissfully ignorant of how they do so. In so far as arithmetic
+expressions are concerned, this chapter addresses one half of the parsing task: computation in `Lox`.
 
 For a primer on the language's general syntax and usage, refer to 
 [Crafting Interpreters, Chapter 3](https://www.craftinginterpreters.com/the-lox-language.html).
-
-## Notes about the chapter
-
-### `ASTPrinter.java`
-
-At the end of the chapter Nystrom writes:
-
-> You can go ahead and delete this method. We won’t need it. Also, as we add new syntax tree types, 
-> I won’t bother showing the necessary visit methods for them in AstPrinter. If you want to (and you 
-> want the Java compiler to not yell at you), go ahead and add them yourself. It will come in handy 
-> in the next chapter when we start parsing Lox code into syntax trees. Or, if you don’t care to maintain 
-> AstPrinter, feel free to delete it. We won’t need it again.
-
-Don't follow the book's advice here: _keep everything currently in `ASTPrinter`_! It's important to our work.
-
-### `Expr.java`
-
-The `Expr.java` file doesn't exist...yet. You will need to _make it_. However, you've got a tool whose entire
-purpose is to manufacture this file without any action on your part. If you look at your `Maven` window, you'll
-probably notice the `AST Generator` below the `Interpreter`. Run the `exec:java` favorite
-there and the `Expr.java` file will create itself in the `Interpreter`'s file path.
 
 ## Learning objectives
 
@@ -40,7 +14,7 @@ This assignment directly addresses the following course learning objectives:
 
 * Correctly identify and describe the steps in the design and implementation of a programming language
 * Interpret and use an existing programming language grammar
-* Using knowledge of the general principles of programming languages, correctly implement a computer program in a heretofore unknown programming language
+* Design, implement, and evaluate a correct scanner and parser for a programming language.
 
 ## Using this repository
 
@@ -54,39 +28,39 @@ Unless tagged as optional, all challenges below are required by this week's work
 
 ### Challenge 1
 
-Nystrom presents us with the following hypothetical production rule:
+In many languages, arithmetic operators can perform _non-arithmetic_ tasks. For example, the following Python operations
+allow string manipulation for non-numeric literals:
+```python
+# String concatenation
+lox = "lox" + "lox"
+lox = "lox" * 2
 ```
-expr → expr ( "(" ( expr ( "," expr )* )? ")" | "." IDENTIFIER )+
-     | IDENTIFIER
-     | NUMBER
-```
-Admittedly, as the author writes, there are several "tricks" here to make the grammar of it more compact.
-If `*`, `|`, `+`, and `?` are "syntactical sugar" (i.e., programmatic shorthand), how many different 
-individual production rules does this single rule encode? What are some examples of how they might occur
-in the `Lox` language? Provide examples for each derivation.
-* Note: this production rule accounts for _several_ (i.e. more than 3) different derivations
-* Respond to this question in the [reflection.md](docs/reflection.md) using individual code fences
-for each example
+`Lox` doesn't possess these features..._yet_. Your task is two-fold: to implement both the `+` and `*` operators in the
+context of computing `string`s in `Lox`. Each should function similar to their counterpart operators in `Python`. To
+implement functionalty for these operators, work in the `visitBinaryExpr` method of `Interpreter.java`.
+
+
+Given that we're not up to parsing multiple expressions yet, we need to work in distinct files to test these challenges:
+
+|Operator |File |
+|:--------|:----|
+|`+` | [plus.lox](interpreter/src/test/resources/plus.lox) |
+|`*` | [star.lox](interpreter/src/test/resources/star.lox) |
 
 ### Challenge 2
 
-Our Code Golf exercise from last week worked in the Scheme language which used "normal Polish notation" 
-(NPN), e.g., `(+ 1 2)` to represent `2 + 1`. Reverse Polish notation (RPN) would represent this differently: 
-`(1 2 +)`. Our `ASTPrinter` file contains an additional `RPNPrinter` class which should produce statements 
-in RPN rather than the current modified `Lox` NPN. 
+At present, if we divide by `0`, it appears that what happens...shouldn't. At all. Ever. It's practically universe-ending. However,
+it shows that  different programming languages interpret the divide by zero operation in unique ways.
 
-To test, let's consider the following connundrum:
-* There exists an expression whose `RPN` representation is: `10.0 6.0 9.0 3.0 + 11.0 - * / * 17.0 + 5.0 +`
-  * Program the appropriate `Lox` equivalent in the `test.lox` file
-    * Use the expression only; no need for a `var ... =` prefix
-  * `Hint`: Its result, when calculated, _would be_ `22`
+As policy in the `Lox` language, we should emit an error if this case ever occurs. 
 
-* Work in: 
-  * [ASTPrinter.java](interpreter/src/main/java/com/interpreter/lox/ASTPrinter.java) to complete the `RPN` representation
-  * [test.lox](interpreter/src/test/resources/test.lox) to write the correct arithmetic expression
+This task is three-fold:
 
-#### Testing
+1. describe why Java interprets the operation the way it does, and
+2. identify at least two unique ways that other programming languages handle the case
+3. implement the above-defined behavior in the interpreter
 
-To test your `RPN` representation, you might use the book's suggested example: `(1 + 2) * (4 - 3)`, which 
-resolves to a reverse Polish notation form: `1 2 + 4 3 -`. You may think of others to try as well!
+Parts `1` and `2` should be completed in your [reflection.md](docs/reflection.md) file. Implement Part `3` in by editing the `visitBinaryExpr` 
+method of `Interpreter.java` to throw an error.
 
+Your program should correctly interpret the expression in [divide.lox](interpreter/src/test/resources/divide.lox).

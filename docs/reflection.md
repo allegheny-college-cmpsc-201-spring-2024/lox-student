@@ -1,17 +1,19 @@
-# CMPSC 201: Representing Code
+# CMPSC 201: Evaluating Expressions
 
-Given the following hypothetical omnibus production rule, how many different
-derivations does it describe?
-```
-expr → expr ( "(" ( expr ( "," expr )* )? ")" | "." IDENTIFIER )+
-     | IDENTIFIER
-     | NUMBER
-```
+1. Describe Java's implementation of the divide-by-zero operation. Why does this happen?
 
-Copy enough of the numbered entry blocks below to describe the derivations.
+> Hint: This may require some looking-up/reading.
 
-1. `TODO: Replace this with the rule derivation` 
-```
-TODO: Copy and paste code blocks and populate with
-      examples of the production rule in Lox.
-```
+`TODO: Respond to the question above.`
+
+2. Identify and describe at least two additional unique ways that other languages implement divide-by-zero.
+
+`TODO: Respond to the question above.`
+
+3. How do language design principles affect or influence the above `3` ways of implementing the calculation?
+
+`TODO: Respond to the question above for all three language examples.`
+
+4. Is there any reason to consider _not_ throwing an error if we encounter an instance of divide-by-zero? If so, what is it?
+
+`TODO: Respond to the question above.`
