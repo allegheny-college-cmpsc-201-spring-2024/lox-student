@@ -7,6 +7,7 @@ var a = 1;
   var a = a + 2;
   print a;
 }
+print a;
 ```
 
 1. What do you think the code does?
