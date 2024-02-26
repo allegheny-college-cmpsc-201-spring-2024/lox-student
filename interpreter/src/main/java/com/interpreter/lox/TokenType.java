@@ -10,12 +10,10 @@ enum TokenType {
   BANG, BANG_EQUAL, EQUAL, EQUAL_EQUAL,
   GREATER, GREATER_EQUAL, LESS, LESS_EQUAL,
 
+  // TODO: Insert a BREAK token
+
   // Literals
   IDENTIFIER, STRING, NUMBER,
-
-  // REMOVE
-  BREAK,
-  // REMOVE
 
   // Keywords.
   AND, CLASS, ELSE, FALSE, FUN, FOR, IF, NIL, OR,

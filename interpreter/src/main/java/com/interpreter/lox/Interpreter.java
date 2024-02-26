@@ -132,16 +132,11 @@ class Interpreter implements Expr.Visitor<Object>,
 
   @Override
   public Void visitWhileStmt(Stmt.While stmt) {
-    try {
-    // KEEP
+    // TODO: Catch if a break exception and in that catch block do...
+    //       nothing?
     while (isTruthy(evaluate(stmt.condition))) {
       execute(stmt.body);
     }
-    // KEEP
-    } catch (BreakException ex) {
-        // Do nary a thing.
-    }
-    // KEEP
     return null;
   }
 
@@ -223,14 +218,8 @@ class Interpreter implements Expr.Visitor<Object>,
 
   @Override
   public Object visitConditionalExpr(Expr.Conditional expr) {
-    // REMOVE
-    Expr condition = expr.expression;
-    if(isTruthy(evaluate(condition))){
-        return evaluate(expr.thenBranch);
-    } else if (!isTruthy(evaluate(condition)) && expr.elseBranch != null) {
-        return evaluate(expr.elseBranch);
-    }
-    // REMOVE
+    // TODO: Find out if the evaluation expression in Conditional statement
+    //       is truthy; then interpret the correct branch accordingly
     return null;
   }
 

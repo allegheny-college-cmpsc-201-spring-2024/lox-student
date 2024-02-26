@@ -12,6 +12,10 @@ class Parser {
   private boolean foundExpression = false;
   private final List<Token> tokens;
   private int current = 0;
+  /*
+   * TODO: Consider the following variable's importance in
+   *       methods such as forStatement, whileStatement
+   */
   private int loopDepth = 0;
 
   Parser(List<Token> tokens) {
@@ -58,9 +62,7 @@ class Parser {
     if (match(PRINT)) return printStatement();
     if (match(WHILE)) return whileStatement();
     if (match(LEFT_BRACE)) return new Stmt.Block(block());
-    // REMOVE
-    if (match(BREAK)) return breakStatement();
-    // REMOVE
+    // TODO: If matching a BREAK token, emit a breakStatement
     return expressionStatement();
   }
 
@@ -84,10 +86,8 @@ class Parser {
       increment = expression();
     }
     consume(RIGHT_PAREN, "Expect ')' after for clauses.");
-
-    try{
-        loopDepth++;
-    // KEEP
+    // TODO: Determine to what extent loopDepth applies; we might
+    //       need to consider try...finally to see how deep the loop goes!
     Stmt body = statement();
     if (increment != null) {
       body = new Stmt.Block(
@@ -103,10 +103,6 @@ class Parser {
       body = new Stmt.Block(Arrays.asList(initializer, body));
     }
     return body;
-    // KEEP
-    } finally {
-        loopDepth--;
-    }
   }
 
   private Stmt ifStatement() {
@@ -143,24 +139,16 @@ class Parser {
     consume(LEFT_PAREN, "Expect '(' after 'while'.");
     Expr condition = expression();
     consume(RIGHT_PAREN, "Expect ')' after condition.");
-    try {
-        loopDepth++;
-    // KEEP
+    // TODO: Determine to what extent loopDepth applies;
+    //       here, we might use try...finally to find out how deep we are
     Stmt body = statement();
     return new Stmt.While(condition, body);
-    // KEEP
-    } finally {
-        loopDepth--;
-    }
   }
 
   private Stmt breakStatement() {
-    // REMOVE
-    if (loopDepth == 0) {
-        error(previous(), "Break statement must be inside loop.");
-    }
-    consume(SEMICOLON, "Expect ';' after 'break'.");
-    // REMOVE
+    // TODO: If loopDepth is zero, we must be outside of a loop; error with
+    //       previous break token!
+    // TODO: Consume the terminal token to ensure we're at the end of a statement
     return new Stmt.Break();
   }
 
@@ -190,8 +178,7 @@ class Parser {
   }
 
   private Expr assignment() {
-    Expr expr = comma();
-    //Expr expr = or();
+    Expr expr = or();
     if (match(EQUAL)) {
       Token equals = previous();
       Expr value = assignment();
@@ -227,10 +214,10 @@ class Parser {
   }
 
   private Expr and() {
-    Expr expr = conditional();
+    Expr expr = equality();
     while (match(AND)) {
       Token operator = previous();
-      Expr right = conditional();
+      Expr right = and();
       expr = new Expr.Logical(expr, operator, right);
     }
     return expr;
