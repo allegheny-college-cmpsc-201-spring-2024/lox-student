@@ -6,10 +6,11 @@ and other control of flow operations occur in `Lox`. Here, we mean `if`, `for`, 
 statements. These structures embed logical statements such as those arbitrated by `and` and `or`
 operators. 
 
-Our challenges explore integrating previous functionality (`ternary` statements`, comma-separated
-declarations) into the new grammar and how to incorporate new functionality such as `break` and
-`continue`, which also affect the flow control of a program. To complete this work, you've been 
-given a novel program writtein the `Lox` language, located in [`interpreter/test/resources/test.lox`](interpreter/test/resources/test.lox).
+Our challenges explore integrating previous functionality (`ternary` statements) into the new grammar 
+and how to incorporate new functionality such as `break` and `continue`, which also affect the flow 
+control of a program. To complete this work, you've been given a novel program written in the `Lox` language, 
+located in [`interpreter/test/resources/test.lox`](interpreter/test/resources/test.lox).
+
 You will need to remove comments marked by `TODO`s in order to expose some of the functionality to
 write your solutions.
 
