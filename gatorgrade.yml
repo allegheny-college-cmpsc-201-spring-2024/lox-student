@@ -1,0 +1,32 @@
+setup: |
+  echo "🧹\tClean from previous compilation (mvn clean)"
+  mvn clean -q || true
+  echo "🛠️\tCompiling program (mvn compile)"
+  mvn compile -q || true
+---
+- description: Break statement ends loop at the correct number (a == 7)
+  category: Tests
+  check: ExecuteCommand
+  options:
+    command: mvn test -Dtest=BaseTests#testBreakStatement -f "interpreter/pom.xml"
+- description: Ternary expression assesses value of a and returns correct branch
+  category: Tests
+  check: ExecuteCommand
+  options:
+    command: mvn test -Dtest=BaseTests#testTernaryExpression -f "interpreter/pom.xml"
+- interpreter/src/test/resources/test.lox:
+  - description: test.lox file contains no TODOs
+    category: TODOs
+    check: MatchFileFragment
+    options:
+      fragment: TODO
+      count: 0
+      exact: true
+- docs/reflection.md:
+  - description: Reflection contains no TODOs
+    category: TODOs
+    check: MatchFileFragment
+    options:
+      fragment: TODO
+      count: 0
+      exact: true

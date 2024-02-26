@@ -1,73 +1,91 @@
-# The Lox Programming Language
+# The Lox Programming Language: Iteration and Flow Control
 
-This repository contains an implementation of the Lox programming language interpreter
-taken directly from the book [_Crafting Interpreters_](https://www.craftinginterpreters.com/)
-by Robert Nystrom. It uses [Apache Maven](https://maven.apache.org/), Apache's build automation
-tool commonly used with Java. Instructions for using this repository exist in the
-[repository wiki](../../wiki/).
+This branch mirrors content from chapter `9` of _Crafting Interpreters_. Our work on implementing
+statements and declarations in last week's lab goes a step further as we explore how iteration 
+and other control of flow operations occur in `Lox`. Here, we mean `if`, `for`, and `while`
+statements. These structures embed logical statements such as those arbitrated by `and` and `or`
+operators. 
 
-## Programmatic content
+Our challenges explore integrating previous functionality (`ternary` statements`, comma-separated
+declarations) into the new grammar and how to incorporate new functionality such as `break` and
+`continue`, which also affect the flow control of a program. To complete this work, you've been 
+given a novel program writtein the `Lox` language, located in [`interpreter/test/resources/test.lox`](interpreter/test/resources/test.lox).
+You will need to remove comments marked by `TODO`s in order to expose some of the functionality to
+write your solutions.
 
-Intended as the main educational tool for `CMPSC 201: Programming Languages` at Allegheny College,
-this repository adopts a branched structureeach chapter, and the name and semantic versioning for each 
-build represents the chapter from which the code was taken. Branches contain all code from preceding
-chapters except where the current chapter modifies it to introduce new features or remedy issues 
-created in previous exercises.
+This exercise will use the `Lox` programming language. For a primer on the language's general syntax and usage, 
+refer to  [Crafting Interpreters, Chapter 3](https://www.craftinginterpreters.com/the-lox-language.html).
 
-## Educational content
+## Learning objectives
 
-Given that this repository accompanies the pedagogical Lox language _and_ textbook introducing that 
-language, each branch contains educational content to help learners demonstrate their understanding
-and intuition about concepts and structures. This content comes in two flavors.
+This assignment directly addresses the following course learning objectives:
 
-### Challenges
+* Correctly identify and describe the steps in the design and implementation of a programming language
+* Interpret and use an existing programming language grammar
+* Using knowledge of the general principles of programming languages, correctly implement a computer program in a heretofore unknown programming language
 
-Each branch's `README` uses the `Challenges` section concluding each chapter of _Crafting Interpreters_ 
-as a summative exploration of students' grasp of concepts introduced and reviewed in the chapter. Typically, 
-at least once students finish the chapter on `parsing`, this takes the shape of requiring students to implement 
-additional language features. These are included in the grader via Maven test cases. In some cases, additional
-challenges have been added to create a deeper learning experience for students.
+## Using this repository
 
-### Reflective writing
-
-This repository caters to a course held in the 
-[Department of Computer and Information Science (CIS)](https://www.cis.allegheny.edu/) at Allegheny College.
-Department pedagogy includes student reflective writing which explores concepts qualitatively, often asking
-students to engage in speculation, exercise their intuition, or write about their understandings or
-experiences engaging with a topic. These documents are included in the `docs` folder in each branch and 
-are also included in the grader's setup, namely by guaranteeing that questions are finished.
-
-## Notes on software supporting this repository
-
-### GatorGrade
-
-[GatorGrade](https://github.com/GatorEducator/gatorgrade) is a command-line automated grading system (AGS) developed
-by Allegheny College faculty and students. For more information on installing and using the system, visit
-the link provided.
-
-All build in this repository, however, automatically installs and configures GatorGrade in its GitHub Actions
-workflows. Educators and their students are invited to install the software on their machines to gain the 
-full range of benefits associated withe just-in-time (JIT) style of feedback it provides via specifications
-grading practices.
-
-### Wizard
-
-[Wizard](https://github.com/term-world/wizard) provides actionable issues to students based on the outcome of 
-their GatorGrader reports via the GitHub issue tracker. When students `push` content to their GitHub repo remotes,
-the tool uses the results of GatorGrade to post an issue detailing all of the objectives they have completed and
-those that they have not yet achieved in the form of issue-based tasks.
-
-### Arborist
-
-[Arborist](https://github.com/term-world/arborist) protects branches from accidental or haphazard `merge`s. Used
-here to protect the `main` and `feedback` (created by GitHub Classroom) branches. Sometimes students merge these
-with other branches and create very tangled webs. The Arborist prevents this.
-
-## Notes on repository setup
-
-The repository's Maven configuration works from the command line, setup included contemplates
+While the repository's Maven configuration works from the command line, setup included contemplates
 the content of the [Getting Started guide](wiki/Getting-Started), which outlines how to set
-up the Java SDK and runtime in addition to helpful Maven tools for VSCode. In addition, this
-repository's Wiki outlines some of the common Apache Maven lifecycle commands used in compiling,
-testing and executing the code for the book, outlined in the 
-[Compiling and Testing Java Programs](wiki/Compiling-and-Testing-Java-Programs) entry.
+up the Java SDK and runtime in addition to helpful Maven tools for VSCode.
+
+## Challenges
+
+Unless tagged as optional, all challenges below are required by this week's work.
+
+### Challenge 1
+
+When iterating, there are times that we want to jump of out a loop when a certain combination of
+conditions occurs that are _not_ the sentinel condition (e.g., breaking out of a forced infinite
+loop). In other instances, we want to skip the product of an iteration and start with the next
+iteration without bothering with the functionality in the `for` or `while` statement's body.
+
+Implement the `break` keyword to bail on loops instantly, a functionality like that of Python's
+`break`.
+
+> Hint: you'll want to implement `break` first, as the solution shows you the various areas
+> of the files to work in.
+
+To complete this work, you'll largely be in:
+
+* `Parser.java`
+* `Scanner.java`
+* `Interpreter.java`
+* `TokenType.java`
+
+There are some supporting functions already created for you. However, they are not necessarily
+populated with helpful code.
+
+#### Extra 
+
+It's also possible to implement the `continue` keyword. For the chance to earn an entire complete branch,
+implement the `continue` keyword. Discuss with the instructor so that you can get the additional test
+to verify.
+
+### Challenge 2
+
+In a previous week, we implemented other pieces of an advanced grammar. Primarily, we're concerned with the
+`conditional` (i.e. `ternary`) rule. However, it's not accounted for in the current grammar. Provide 
+an implementation of the `conditional` structure such that it satisfies the `TODO`'d-out functionality in 
+`test.lox`.
+
+To complete this work, work in:
+
+* `Parser.java`
+* `Interpreter.java`
+
+### Challenge 3
+
+Here, we see iteration in its plainest form. As we prepare for next chapter's work on functions, there's yet
+another way that we can integrate recursion into our programs using functions. You're probably aware of versions
+of this method of looping (i.e. it has a special name, starting with the letter `r`). However, there's a key
+difference between `for` loops and what is described above.
+
+Versions of this method enable an optimization that allows for deep (i.e. long) loops. What is the name of this
+specific type of iteration? What is an example of a language that implements this as its primary (or only) method
+of iteration?
+
+> Hint: we've golfed using this language.
+
+Discuss this using the prompts in our [`docs/reflection.md`](docs/reflection.md) file.
