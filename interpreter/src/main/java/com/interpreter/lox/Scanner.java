@@ -29,6 +29,7 @@ class Scanner {
     keywords.put("true",   TRUE);
     keywords.put("var",    VAR);
     keywords.put("while",  WHILE);
+    // TODO: Add relevant keyword(s) here
   }
 
   private final String source;
